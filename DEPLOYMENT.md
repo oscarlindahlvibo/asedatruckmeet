@@ -1,33 +1,31 @@
 # Deployment
 
+Den aktiva applikationen är en Vite/React SPA. För den gemensamma servern ska
+`dist/` kopieras till denna apps egen webbrot. Använd inte den gamla lokala
+Next/Prisma-compose-konfigurationen för frontenddeployment.
+
 ## Serverkrav
 
 - Linux-server med Docker och Docker Compose.
-- Node.js 22 om appen körs utan container.
-- PostgreSQL 17.
-- Redis 7.
-- S3-kompatibel objektlagring, exempelvis Cloudflare R2 eller MinIO.
+- Node.js 22 för byggsteget.
 - HTTPS via reverse proxy, exempelvis Caddy, nginx eller Traefik.
 
 ## Produktionsflöde
 
-1. Skapa `.env` från `.env.example`.
-2. Sätt riktiga secrets.
-3. Starta databas, Redis och object storage.
-4. Kör migreringar.
-5. Kör app och worker.
+1. Sätt `VITE_SUPABASE_URL` och `VITE_SUPABASE_ANON_KEY` i byggmiljön.
+2. Kör migreringarna från `supabase/migrations/` mot den gemensamma Supabase-instansen.
+3. Kör `npm ci` och `npm run build`.
+4. Kopiera endast `dist/` till appens egen webbrot.
+5. Konfigurera SPA-fallback till `index.html`.
 6. Lägg reverse proxy framför appen.
-7. Konfigurera Pretix webhook till `/api/pretix/webhook`.
 
 ```bash
-docker compose up -d postgres redis minio
-docker compose build web worker
-docker compose run --rm web npx prisma migrate deploy
-docker compose up -d web worker
+npm ci
+npm run build
 ```
 
-Pretix bör köras separat enligt officiell Pretix-dokumentation, inte bakas in i
-webbappen.
+Pretix och privata admin-/orderoperationer ska köras separat via Supabase Edge
+Functions enligt `DEPLOYMENT_SHARED_SUPABASE.md`.
 
 ## Secrets
 

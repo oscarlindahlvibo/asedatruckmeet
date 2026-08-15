@@ -22,26 +22,23 @@ database. Prisma is used here for the runtime client and local development.
 
 ## Build and runtime
 
-This repository is a Next.js SSR application with server routes for auth,
-Pretix, admin and the app API. It is not a static Vite site. The existing
-`npm run build` produces `.next`, and production must run:
+This repository is a Vite/React SPA. The active frontend has no Next.js
+runtime and `npm run build` produces a self-contained `dist/` directory:
 
 ```bash
 npm ci
 npm run build
-npm run start
+npm run preview
 ```
 
-Run it in its own container/process and route the domain to port 3000. Do not
-copy this app's `.next` or a stale `dist/` directory into another app's web
-root. The generic static-app deployer should skip this repository's `dist/`
-copy step, or invoke the app's SSR deployment adapter.
+Copy only this repository's `dist/` into its own web root. Configure the web
+server fallback to `dist/index.html` for SPA routes. Do not share or overwrite
+another app's web root.
 
-The `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` variables may exist in the
-shared build environment, but this Next runtime does not use them. Do not
-expose `DATABASE_URL`, `PRETIX_API_TOKEN`, `SUPABASE_SERVICE_ROLE_KEY` or
-`AUTH_SECRET` to the browser.
+The frontend may use `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` for
+public Supabase access. Do not expose `DATABASE_URL`, `PRETIX_API_TOKEN`,
+`SUPABASE_SERVICE_ROLE_KEY` or `AUTH_SECRET` to the browser. Pretix actions,
+admin authorization and private data belong in Supabase Edge Functions.
 
-`DATABASE_URL` is not required during `npm run build`/`prisma generate`, but it
-is required when the running SSR process handles requests or when migrations
-are executed.
+`DATABASE_URL` is not required by the static build. It is only needed by the
+separate migration/worker tooling if those are retained on the server.

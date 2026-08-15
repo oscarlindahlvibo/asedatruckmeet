@@ -1,57 +1,43 @@
 # Åseda Truckmeet Platform
 
-Modern webb- och eventplattform för Åseda Truckmeet.
+Vite/React-frontend för Åseda Truckmeet.
 
-Målet är en sammanhållen publik webbplats, Mina sidor och admin för arrangören,
-med Pretix bakom kulisserna som biljettmotor.
+Den aktiva frontend-builden är en statisk SPA. Supabase Edge Functions står för
+auth, admin, Pretix-integrationer och annan server-side logik.
 
 ## Lokal start
 
 ```bash
-cp .env.example .env
-docker compose up -d postgres redis minio
 npm install
-npm run db:migrate
-npm run db:seed
 npm run dev
 ```
 
-Öppna `http://localhost:3000`.
+Öppna Vite-adressen som skrivs ut i terminalen, normalt `http://localhost:5173`.
 
 ## Viktiga ytor
 
 - Publik webb: `/`
-- Biljetter/Pretix widget: `/biljetter`
-- Mina sidor: `/konto`
+- Biljetter: `/biljetter`
 - Lastbilsgalleri: `/lastbilar`
-- Program: `/program`
-- Karta: `/karta`
-- Publikens val: `/rosta`
-- Admin: `/admin`
-- Systemhälsa: `/admin/system/health`
-- Health API: `/api/system/health`
-- Pretix webhook: `/api/pretix/webhook`
-- App API: se [`APP_API.md`](./APP_API.md), publika lastbilar finns på `/api/public/events/{slug}/trucks`
-- Shared Supabase deployment: se [`DEPLOYMENT_SHARED_SUPABASE.md`](./DEPLOYMENT_SHARED_SUPABASE.md)
-- Magic link API: `/api/auth/request` och `/api/auth/verify`
-- Truckbild-upload: `/api/uploads/truck` (S3/MinIO + Sharp)
-- Sponsorlogotyper: `/api/uploads/partner-logo`
+- Partners: `/partners`
+- Besöksinfo: `/besok`
+- App API-kontrakt: [`APP_API.md`](./APP_API.md)
+- Shared Supabase-deployment: [`DEPLOYMENT_SHARED_SUPABASE.md`](./DEPLOYMENT_SHARED_SUPABASE.md)
 
 ## Arkitektur
 
-Appen är en Next.js/TypeScript-applikation med PostgreSQL, Prisma, Redis och
-S3-kompatibel objektlagring. Pretix körs separat och är source of truth för
-biljetter, betalningar, refunds, quotas, QR/ticket secrets och check-in.
+Frontend är Vite/React och byggs till `dist/`. Supabase Edge Functions är
+systemets serverlager. Pretix körs separat och är source of truth för biljetter,
+betalningar, refunds, quotas, QR/ticket secrets och check-in.
 
 Truckmeet-systemet äger CMS, eventdata, Mina sidor, truckprofiler, karta,
 publikens val, analytics, admin UX och lokala read models av Pretix-data.
 
 ## Databas och lokala secrets
 
-Prisma 7 använder PostgreSQL-adaptern `@prisma/adapter-pg`. `DATABASE_URL`
-måste finnas även vid `prisma generate`. Kör `npm run db:migrate` innan seed.
-Magic links skickas via SMTP i produktion. I lokal utveckling returnerar API:t
-en förhandslänk i svaret så flödet kan testas utan e-postserver.
+Databasmigreringen finns i `supabase/migrations/` och använder det isolerade
+schemat `truckmeet`. `DATABASE_URL` ska endast användas av migrationer eller
+server-side workers, aldrig i frontend-builden.
 
 Bildflödet kräver S3-kompatibel lagring. Originalbilden konverteras till WebP
 och en thumbnail sparas som variant. Ägarkontroll sker server-side innan någon
@@ -59,8 +45,8 @@ fil tas emot eller kopplas till en truckprofil.
 
 ## Demo-data
 
-Seed-scriptet skapar Åseda Truckmeet 2027 och prefixar demo-innehåll med
-`DEMO`. Demo-data ska aldrig användas som produktionstext.
+Frontendens fallback-data är tydligt markerad som demo. Publika produktionstexter
+och truckdata ska hämtas från Supabase/Edge Functions.
 
 ## Import från gamla webbplatsen
 
