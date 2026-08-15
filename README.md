@@ -32,6 +32,7 @@ npm run dev
 - Health API: `/api/system/health`
 - Pretix webhook: `/api/pretix/webhook`
 - App API: se [`APP_API.md`](./APP_API.md), publika lastbilar finns på `/api/public/events/{slug}/trucks`
+- Shared Supabase deployment: se [`DEPLOYMENT_SHARED_SUPABASE.md`](./DEPLOYMENT_SHARED_SUPABASE.md)
 - Magic link API: `/api/auth/request` och `/api/auth/verify`
 - Truckbild-upload: `/api/uploads/truck` (S3/MinIO + Sharp)
 - Sponsorlogotyper: `/api/uploads/partner-logo`

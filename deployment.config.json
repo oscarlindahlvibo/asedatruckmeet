@@ -1,0 +1,12 @@
+{
+  "appId": "aseda-truckmeet",
+  "deploymentMode": "next-ssr",
+  "buildCommand": "npm run build",
+  "startCommand": "npm run start",
+  "staticDistCopy": false,
+  "supabaseSchema": "truckmeet",
+  "edgeFunctionPrefix": "truckmeet-",
+  "migrationDirectory": "supabase/migrations",
+  "requiredRuntimeEnv": ["DATABASE_URL", "AUTH_SECRET", "NEXT_PUBLIC_SITE_URL"],
+  "optionalSharedBuildEnv": ["VITE_SUPABASE_URL", "VITE_SUPABASE_ANON_KEY"]
+}
