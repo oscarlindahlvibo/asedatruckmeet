@@ -41,3 +41,7 @@ The `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` variables may exist in the
 shared build environment, but this Next runtime does not use them. Do not
 expose `DATABASE_URL`, `PRETIX_API_TOKEN`, `SUPABASE_SERVICE_ROLE_KEY` or
 `AUTH_SECRET` to the browser.
+
+`DATABASE_URL` is not required during `npm run build`/`prisma generate`, but it
+is required when the running SSR process handles requests or when migrations
+are executed.
