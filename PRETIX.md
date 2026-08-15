@@ -55,6 +55,7 @@ lokala truckprofilen automatiskt när ordern synkas:
 - `truck_company`, `truck_driver`, `truck_registration`
 - `truck_country`, `truck_city`, `truck_brand`, `truck_model`, `truck_model_year`
 - `truck_engine_type`, `truck_engine_power`, `truck_bodywork`
+- `truck_vehicle_height`, `truck_vehicle_length`, `truck_shirt_size`
 - `truck_category`, `truck_competition_class`, `truck_description`
 - `truck_instagram`, `truck_facebook`, `truck_website`, `truck_photographer`
 - `truck_public_consent`

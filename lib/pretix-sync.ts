@@ -25,6 +25,9 @@ function truckQuestionAnswers(answers: Array<{ question_identifier?: string; ans
     modelYear: "truck_model_year",
     engineType: "truck_engine_type",
     enginePower: "truck_engine_power",
+    vehicleHeight: "truck_vehicle_height",
+    vehicleLength: "truck_vehicle_length",
+    shirtSize: "truck_shirt_size",
     bodywork: "truck_bodywork",
     category: "truck_category",
     competitionClass: "truck_competition_class",
@@ -38,7 +41,7 @@ function truckQuestionAnswers(answers: Array<{ question_identifier?: string; ans
   const byIdentifier = new Map((answers ?? []).map((answer) => [answer.question_identifier, answer.answer ?? ""]));
   const value = (field: string) => map[field] ? byIdentifier.get(map[field]) : undefined;
   const data: Record<string, string | number | boolean> = {};
-  for (const field of ["companyName", "driverName", "registrationNumber", "country", "city", "brand", "model", "engineType", "enginePower", "bodywork", "category", "competitionClass", "description", "instagramUrl", "facebookUrl", "websiteUrl", "photographer"]) {
+  for (const field of ["companyName", "driverName", "registrationNumber", "country", "city", "brand", "model", "engineType", "enginePower", "vehicleHeight", "vehicleLength", "shirtSize", "bodywork", "category", "competitionClass", "description", "instagramUrl", "facebookUrl", "websiteUrl", "photographer"]) {
     const answer = value(field);
     if (answer) data[field] = answer;
   }
@@ -86,10 +89,11 @@ export async function syncPretixOrder(input: { eventId: string; eventSlug: strin
   if (vehiclePosition) {
     const owner = buyerEmail ? await prisma.user.findUnique({ where: { email: buyerEmail } }) : null;
     const truckData = truckQuestionAnswers(vehiclePosition.answers);
+    const registrationData = { answers: vehiclePosition.answers ?? [], extras: positions.filter((position) => position.id !== vehiclePosition.id).map((position) => ({ item: position.item, variation: position.variation, name: position.item_name })) };
     await prisma.truckProfile.upsert({
       where: { eventId_slug: { eventId: input.eventId, slug: `${slugify(source.code)}-${vehiclePosition.id}` } },
-      update: { ownerUserId: owner?.id, pretixOrderCode: source.code, pretixPositionId: vehiclePosition.id, ...truckData },
-      create: { eventId: input.eventId, ownerUserId: owner?.id, pretixOrderCode: source.code, pretixPositionId: vehiclePosition.id, slug: `${slugify(source.code)}-${vehiclePosition.id}`, status: "INCOMPLETE", ...truckData },
+      update: { ownerUserId: owner?.id, pretixOrderCode: source.code, pretixPositionId: vehiclePosition.id, registrationData, ...truckData },
+      create: { eventId: input.eventId, ownerUserId: owner?.id, pretixOrderCode: source.code, pretixPositionId: vehiclePosition.id, slug: `${slugify(source.code)}-${vehiclePosition.id}`, status: "INCOMPLETE", registrationData, ...truckData },
     });
   }
   return order;

@@ -315,6 +315,9 @@ model TruckProfile {
   modelYear           Int?
   engineType          String?
   enginePower         String?
+  vehicleHeight       String?
+  vehicleLength       String?
+  shirtSize           String?
   bodywork            String?
   category            String?
   competitionClass    String?
@@ -323,6 +326,7 @@ model TruckProfile {
   facebookUrl         String?
   websiteUrl          String?
   photographer        String?
+  registrationData    Json?
   mainImageAssetId    String?
   publicConsent       Boolean            @default(false)
   status              TruckProfileStatus @default(INCOMPLETE)
