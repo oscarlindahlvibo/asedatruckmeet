@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { prisma } from "@/lib/prisma";
 import { PretixClient } from "@/lib/pretix";
+import { getPretixRuntimeConfig } from "@/lib/pretix-config";
 
 function hashSecret(value: string | undefined) {
   return value ? createHash("sha256").update(value).digest("hex") : null;
@@ -11,7 +12,9 @@ function slugify(value: string) {
 }
 
 export async function syncPretixOrder(input: { eventId: string; eventSlug: string; organizerSlug: string; code: string }) {
-  const client = new PretixClient();
+  const config = await getPretixRuntimeConfig();
+  if (!config) throw new Error("Pretix saknar konfiguration");
+  const client = new PretixClient(config);
   const source = await client.getOrder(input.eventSlug, input.code);
   const buyerEmail = source.email?.trim().toLowerCase() ?? null;
   const buyerName = source.invoice_address?.name ?? null;

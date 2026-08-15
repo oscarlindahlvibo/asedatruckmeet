@@ -61,6 +61,11 @@ export async function consumeMagicLink(token: string) {
     update: { emailVerified: new Date() },
     create: { email: record.email, emailVerified: new Date() },
   });
+  // Link orders purchased before the first login, using Pretix's verified buyer email.
+  await prisma.userOrderLink.createMany({
+    data: (await prisma.pretixOrderReadModel.findMany({ where: { buyerEmail: record.email }, select: { id: true } })).map((order) => ({ userId: user.id, orderId: order.id })),
+    skipDuplicates: true,
+  });
   await prisma.magicLinkToken.update({ where: { id: record.id }, data: { usedAt: new Date() } });
 
   const rawSession = createOneTimeToken();
