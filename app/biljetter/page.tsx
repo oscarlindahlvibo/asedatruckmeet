@@ -2,21 +2,38 @@ import Script from "next/script";
 import { PublicShell } from "@/components/public-shell";
 import { PretixWidget } from "@/components/pretix-widget";
 import { currentEvent } from "@/lib/demo-data";
+import { getTicketShopProducts } from "@/lib/ticket-shop";
+import { TicketCatalog } from "@/components/ticket-catalog";
 
-export default function TicketsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function TicketsPage() {
+  const { products, live } = await getTicketShopProducts();
+
   return (
     <PublicShell>
       <main className="subpage">
         <section className="subpage-hero">
-          <p className="overline">Pretix ticket shop</p>
+          <p className="overline">Åseda Truckmeet · {currentEvent.year}</p>
           <h1>Biljetter</h1>
           <p>
-            Köpflödet körs via Pretix, men bäddas in här så besökaren stannar
-            i Åseda Truckmeet-upplevelsen. Pretix är source of truth för order,
-            betalning, QR, kvitto och återbetalning.
+            Välj rätt biljett för ditt besök. Produkterna och priserna hämtas
+            från vår biljettmotor och checkouten slutförs säkert i Pretix.
           </p>
         </section>
-        <section className="ticket-widget-shell">
+        <section className="ticket-shop-status">
+          <span className="ticket-status-dot" aria-hidden="true" />
+          {live ? "Biljetter och tillgänglighet uppdateras live" : "Förhandsvisning av biljettbutiken"}
+        </section>
+        <TicketCatalog products={products} />
+        <section className="ticket-widget-shell" id="pretix-checkout">
+          <div className="ticket-checkout-heading">
+            <div>
+              <p className="overline">Säker checkout</p>
+              <h2>Slutför ditt köp</h2>
+            </div>
+            <p>Betalning, orderbekräftelse, QR-biljett och återbetalning hanteras av Pretix.</p>
+          </div>
           <Script src={`${currentEvent.pretixEventUrl.replace(/\/$/, "")}/widget/v2.sv.js`} strategy="lazyOnload" />
           <link rel="stylesheet" href={`${currentEvent.pretixEventUrl.replace(/\/$/, "")}/widget/v2.css`} />
           <PretixWidget eventUrl={currentEvent.pretixEventUrl} />

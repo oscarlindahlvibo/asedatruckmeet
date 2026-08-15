@@ -35,6 +35,23 @@ export type PretixOrder = {
   }>;
 };
 
+export type PretixProduct = {
+  id: number;
+  name?: string | Record<string, string>;
+  description?: string | Record<string, string> | null;
+  default_price?: string;
+  category?: number | null;
+  active?: boolean;
+  admission?: boolean;
+  available?: number | null;
+  variations?: Array<{
+    id: number;
+    value?: string | Record<string, string>;
+    default_price?: string;
+    active?: boolean;
+  }>;
+};
+
 export function getPretixConfig() {
   const parsed = pretixConfigSchema.safeParse({
     baseUrl: process.env.PRETIX_BASE_URL,
@@ -82,7 +99,7 @@ export class PretixClient {
   listProducts(eventSlug: string) {
     return this.request(
       `/api/v1/organizers/${this.organizer}/events/${eventSlug}/items/`,
-    );
+    ) as Promise<{ results: PretixProduct[] }>;
   }
 
   getOrder(eventSlug: string, orderCode: string) {
