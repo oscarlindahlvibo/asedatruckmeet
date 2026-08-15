@@ -34,6 +34,7 @@ export type PretixOrder = {
     admission?: boolean;
     secret?: string;
     checkins?: Array<{ datetime?: string; list?: number }>;
+    answers?: Array<{ question?: number; question_identifier?: string; answer?: string; option_identifiers?: string[] }>;
   }>;
 };
 
@@ -108,6 +109,14 @@ export class PretixClient {
     return this.request(
       `/api/v1/organizers/${this.organizer}/events/${eventSlug}/orders/${orderCode}/?expand=positions.item&expand=positions.variation&expand=checkins`,
     ) as Promise<PretixOrder>;
+  }
+
+  async downloadOrderTickets(eventSlug: string, orderCode: string, output = "pdf") {
+    const response = await fetch(`${this.baseUrl}/api/v1/organizers/${this.organizer}/events/${eventSlug}/orders/${orderCode}/download/${output}/`, {
+      headers: { Accept: "application/pdf, application/zip", Authorization: `Token ${this.token}` },
+      cache: "no-store",
+    });
+    return response;
   }
 
   listOrdersModifiedSince(eventSlug: string, modifiedSince?: string) {

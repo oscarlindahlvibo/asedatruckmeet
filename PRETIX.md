@@ -46,3 +46,27 @@ Pretix kan skicka samma webhook mer än en gång, så idempotency är obligatori
 
 Ekonomiska och säkerhetskritiska åtgärder ska alltid gå via Pretix officiella
 API eller länkas till Pretix UI med “Öppna i Pretix”.
+
+## Fordonsregistrering i checkout
+
+Skapa Pretix-frågor på fordonsbiljetten med dessa identifierare så fylls den
+lokala truckprofilen automatiskt när ordern synkas:
+
+- `truck_company`, `truck_driver`, `truck_registration`
+- `truck_country`, `truck_city`, `truck_brand`, `truck_model`, `truck_model_year`
+- `truck_engine_type`, `truck_engine_power`, `truck_bodywork`
+- `truck_category`, `truck_competition_class`, `truck_description`
+- `truck_instagram`, `truck_facebook`, `truck_website`, `truck_photographer`
+- `truck_public_consent`
+
+Identifierarna kan ändras med `PRETIX_TRUCK_QUESTION_MAP`. Pretix är source of
+truth för svaren; den lokala profilen är en read model som kan kompletteras i
+Mina sidor.
+
+## Byte/vidareförsäljning
+
+Ett automatiserat flöde kan använda Pretix `mark_canceled` och skapa en
+engångsvoucher med `allow_ignore_quota=true`. Det måste först fastställas hur
+betalningsleverantören ska hantera återbetalningen och vilken ändringsavgift
+som gäller. Därför ska detta köras som ett godkänt adminflöde via Pretix API,
+inte som en fri kundändring av ordern.
