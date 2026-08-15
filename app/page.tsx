@@ -8,8 +8,19 @@ import {
   trucks,
 } from "@/lib/demo-data";
 import { getPublicPartnerContent } from "@/lib/public-partners";
+import type { PublicPartner } from "@/lib/public-partners";
 
 export const dynamic = "force-dynamic";
+
+function SponsorLogo({ partner }: { partner: PublicPartner }) {
+  return partner.logoUrl ? <img className="sponsor-logo-image" src={partner.logoUrl} alt={`${partner.name} logotyp`} /> : <span className="sponsor-logo" aria-hidden="true">{partner.initials}</span>;
+}
+
+function SponsorTierRow({ tier, partners }: { tier: { name: string; slug: string; rank: number }; partners: PublicPartner[] }) {
+  const items = partners.filter((partner) => partner.tier === tier.name);
+  const isRolling = tier.rank >= 3;
+  return <div className={`sponsor-tier sponsor-tier-${tier.rank}`}><p className="overline">{tier.name}</p>{isRolling ? <div className="sponsor-marquee-viewport"><div className="sponsor-marquee-track">{[...items, ...items].map((partner, index) => <Link className="sponsor-card sponsor-card-rolling" href={`/partners/${partner.slug}`} key={`${partner.slug}-${index}`}><SponsorLogo partner={partner} /><strong>{partner.name}</strong><small>{partner.description}</small></Link>)}</div></div> : <div className="sponsor-feature-grid">{items.slice(0, tier.rank === 1 ? 1 : 4).map((partner) => <Link className="sponsor-card" href={`/partners/${partner.slug}`} key={partner.slug}><SponsorLogo partner={partner} /><strong>{partner.name}</strong><small>{partner.description}</small></Link>)}</div>}</div>;
+}
 
 function countdownTarget() {
   const now = Date.now();
@@ -43,6 +54,7 @@ export default async function Home() {
               <Sparkles size={16} />
               {currentEvent.heroKicker}
             </p>
+            <img className="home-brand-logo" src="/aseda-truckmeet-logo.png" alt="Åseda Truckmeet" />
             <h1>{currentEvent.heroTitle}</h1>
             <p className="hero-date">{currentEvent.dateLabel}</p>
             <p className="hero-lead">{currentEvent.heroLead}</p>
@@ -145,7 +157,7 @@ export default async function Home() {
         <section className="partner-showcase">
           <div className="section-title"><p className="overline">Partners som gör folkfesten möjlig</p><h2>Med Åseda Truckmeet</h2><Link href="/partners">Se alla partners</Link></div>
           <div className="sponsor-tier-grid">
-            {partnerTiers.map((tier) => <div className={`sponsor-tier sponsor-tier-${tier.rank}`} key={tier.slug}><p className="overline">{tier.name}</p><div>{partners.filter((partner) => partner.tier === tier.name).slice(0, tier.rank === 1 ? 1 : 4).map((partner) => <Link className="sponsor-card" href={`/partners/${partner.slug}`} key={partner.slug}>{partner.logoUrl ? <img className="sponsor-logo-image" src={partner.logoUrl} alt={`${partner.name} logotyp`} /> : <span className="sponsor-logo" aria-hidden="true">{partner.initials}</span>}<strong>{partner.name}</strong><small>{partner.description}</small></Link>)}</div></div>)}
+            {partnerTiers.map((tier) => <SponsorTierRow tier={tier} partners={partners} key={tier.slug} />)}
           </div>
         </section>
 

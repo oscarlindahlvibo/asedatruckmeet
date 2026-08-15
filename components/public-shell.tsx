@@ -15,7 +15,7 @@ export function PublicHeader() {
   return (
     <header className="tm-header">
       <Link className="tm-brand" href="/">
-        <span className="tm-brand-mark">ÅT</span>
+        <span className="tm-brand-mark"><img src="/aseda-truckmeet-logo.png" alt="Åseda Truckmeet" /></span>
         <span>
           <strong>Åseda Truckmeet</strong>
           <small>{currentEvent.dateLabel}</small>
