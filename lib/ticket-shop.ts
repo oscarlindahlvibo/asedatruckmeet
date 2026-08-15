@@ -1,5 +1,6 @@
 import { currentEvent } from "@/lib/demo-data";
 import { PretixClient, type PretixProduct } from "@/lib/pretix";
+import { getPretixRuntimeConfig } from "@/lib/pretix-config";
 
 export type ShopProduct = {
   id: number;
@@ -53,7 +54,9 @@ function normalize(product: PretixProduct): ShopProduct {
 export async function getTicketShopProducts(): Promise<{ products: ShopProduct[]; live: boolean }> {
   const eventSlug = process.env.PRETIX_EVENT_SLUG ?? "2027";
   try {
-    const client = new PretixClient();
+    const config = await getPretixRuntimeConfig();
+    if (!config) throw new Error("Pretix saknar konfiguration");
+    const client = new PretixClient(config);
     const response = await client.listProducts(eventSlug);
     const products = (response.results ?? [])
       .filter((product) => product.active !== false)

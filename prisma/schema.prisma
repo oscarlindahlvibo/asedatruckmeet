@@ -502,6 +502,18 @@ model IntegrationError {
   createdAt DateTime @default(now())
 }
 
+model PretixSettings {
+  id                  String   @id @default("default")
+  baseUrl             String
+  organizer           String
+  eventSlug           String
+  publicEventUrl      String
+  encryptedApiToken   String?
+  tokenConfigured     Boolean  @default(false)
+  updatedAt           DateTime @updatedAt
+  createdAt           DateTime @default(now())
+}
+
 model AnalyticsEvent {
   id        String   @id @default(cuid())
   eventId   String?

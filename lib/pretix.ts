@@ -7,6 +7,8 @@ const pretixConfigSchema = z.object({
   organizer: z.string().min(1),
 });
 
+export type PretixConfig = z.infer<typeof pretixConfigSchema>;
+
 export type PretixWebhookPayload = {
   notification_id?: number | string;
   organizer?: string;

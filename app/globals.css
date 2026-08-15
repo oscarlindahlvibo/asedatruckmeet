@@ -305,6 +305,11 @@ h3 { margin-bottom: 10px; font-size: 22px; }
 .admin-form label { display: grid; gap: 7px; color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
 .admin-form input, .admin-form textarea, .admin-form select { min-height: 44px; border: 1px solid var(--line); background: #101214; color: var(--text); padding: 10px 12px; font: inherit; }
 .admin-form textarea { resize: vertical; line-height: 1.5; }
+.admin-form-heading, .admin-form-actions { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.admin-form-heading h2 { margin: 0; }
+.config-state { padding: 8px 10px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; font-size: 12px; font-weight: 900; text-transform: uppercase; }
+.config-state.is-ready { color: var(--green); border-color: rgba(49,208,120,0.45); }
+.form-grid-wide { grid-column: 1 / -1; }
 .admin-form small { color: var(--muted); font-size: 11px; letter-spacing: 0; text-transform: none; }
 .admin-note { color: var(--muted); margin: 0; }
 .admin-table-wrap { overflow-x: auto; border: 1px solid var(--line); }

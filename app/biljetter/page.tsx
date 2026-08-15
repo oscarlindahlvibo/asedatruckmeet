@@ -4,11 +4,14 @@ import { PretixWidget } from "@/components/pretix-widget";
 import { currentEvent } from "@/lib/demo-data";
 import { getTicketShopProducts } from "@/lib/ticket-shop";
 import { TicketCatalog } from "@/components/ticket-catalog";
+import { getPretixPublicSettings } from "@/lib/pretix-config";
 
 export const dynamic = "force-dynamic";
 
 export default async function TicketsPage() {
   const { products, live } = await getTicketShopProducts();
+  const pretixSettings = await getPretixPublicSettings();
+  const eventUrl = pretixSettings.publicEventUrl || currentEvent.pretixEventUrl;
 
   return (
     <PublicShell>
@@ -34,13 +37,13 @@ export default async function TicketsPage() {
             </div>
             <p>Betalning, orderbekräftelse, QR-biljett och återbetalning hanteras av Pretix.</p>
           </div>
-          <Script src={`${currentEvent.pretixEventUrl.replace(/\/$/, "")}/widget/v2.sv.js`} strategy="lazyOnload" />
-          <link rel="stylesheet" href={`${currentEvent.pretixEventUrl.replace(/\/$/, "")}/widget/v2.css`} />
-          <PretixWidget eventUrl={currentEvent.pretixEventUrl} />
+          <Script src={`${eventUrl.replace(/\/$/, "")}/widget/v2.sv.js`} strategy="lazyOnload" />
+          <link rel="stylesheet" href={`${eventUrl.replace(/\/$/, "")}/widget/v2.css`} />
+          <PretixWidget eventUrl={eventUrl} />
           <noscript>
             <div className="fallback-box">
               JavaScript är avstängt. Öppna biljettbutiken direkt:
-              <a href={currentEvent.pretixEventUrl}>Pretix ticket shop</a>
+              <a href={eventUrl}>Pretix ticket shop</a>
             </div>
           </noscript>
         </section>
