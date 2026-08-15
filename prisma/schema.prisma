@@ -1,0 +1,526 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum EventStage {
+  DRAFT
+  ANNOUNCED
+  TICKETS_COMING
+  TICKETS_ON_SALE
+  EVENT_WEEK
+  LIVE
+  FINISHED
+}
+
+enum Role {
+  SUPER_ADMIN
+  EVENT_ADMIN
+  CONTENT_EDITOR
+  TICKET_ADMIN
+  TRUCK_MODERATOR
+  MAP_EDITOR
+  VOTE_ADMIN
+  STAFF_READONLY
+}
+
+enum PublicationStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum TruckProfileStatus {
+  INCOMPLETE
+  PENDING_APPROVAL
+  APPROVED
+  REJECTED
+  HIDDEN
+}
+
+enum VoteVerificationMode {
+  OPEN
+  EMAIL_REQUIRED
+  TICKET_REQUIRED
+}
+
+model Event {
+  id                  String               @id @default(cuid())
+  year                Int                  @unique
+  name                String
+  slug                String               @unique
+  stage               EventStage           @default(DRAFT)
+  startsAt            DateTime
+  endsAt              DateTime
+  ticketSalesOpenAt   DateTime?
+  locationName        String
+  locationAddress     String?
+  heroTitle           String
+  heroKicker          String?
+  heroLead            String
+  heroMediaAssetId    String?
+  featuredVideoUrl    String?
+  pretixOrganizerSlug String?
+  pretixEventSlug     String?
+  pretixEventUrl      String?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  pages               CmsPage[]
+  media               MediaAsset[]
+  programItems        ProgramItem[]
+  artists             Artist[]
+  partnerTiers        PartnerTier[]
+  partners            Partner[]
+  exhibitors          Exhibitor[]
+  faqs                FaqItem[]
+  news                NewsArticle[]
+  trucks              TruckProfile[]
+  maps                EventMap[]
+  polls               VotePoll[]
+  pretixOrders        PretixOrderReadModel[]
+}
+
+model User {
+  id            String      @id @default(cuid())
+  email         String      @unique
+  name          String?
+  phone         String?
+  roles         Role[]      @default([])
+  emailVerified DateTime?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  trucks        TruckProfile[]
+  auditLogs     AuditLog[]
+  orderLinks    UserOrderLink[]
+  sessions      Session[]
+}
+
+model MagicLinkToken {
+  id        String   @id @default(cuid())
+  email     String
+  tokenHash String   @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+}
+
+model Session {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash  String   @unique
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  lastSeenAt DateTime @default(now())
+}
+
+model CmsPage {
+  id          String            @id @default(cuid())
+  eventId     String?
+  event       Event?            @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  slug        String
+  title       String
+  intro       String?
+  body        Json
+  status      PublicationStatus @default(DRAFT)
+  seoTitle    String?
+  seoDescription String?
+  previewToken String?          @unique
+  publishedAt DateTime?
+  updatedAt   DateTime          @updatedAt
+
+  @@unique([eventId, slug])
+}
+
+model MediaAsset {
+  id           String   @id @default(cuid())
+  eventId      String?
+  event        Event?   @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  bucket       String
+  objectKey    String
+  publicUrl    String?
+  mimeType     String
+  sizeBytes    Int
+  width        Int?
+  height       Int?
+  alt          String?
+  credit       String?
+  variants     Json?
+  createdAt    DateTime @default(now())
+}
+
+model PartnerTier {
+  id        String  @id @default(cuid())
+  eventId   String
+  event     Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name      String
+  slug      String
+  rank      Int
+  isPublic  Boolean @default(true)
+  partners  Partner[]
+
+  @@unique([eventId, slug])
+}
+
+model Partner {
+  id          String   @id @default(cuid())
+  eventId     String
+  event       Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  tierId      String?
+  tier        PartnerTier? @relation(fields: [tierId], references: [id], onDelete: SetNull)
+  name        String
+  slug        String
+  description String?
+  websiteUrl  String?
+  logoAssetId String?
+  coverAssetId String?
+  booth       String?
+  mapPoiId    String?
+  sortOrder   Int      @default(100)
+  isPublic    Boolean  @default(true)
+
+  @@unique([eventId, slug])
+}
+
+model Exhibitor {
+  id          String  @id @default(cuid())
+  eventId     String
+  event       Event   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name        String
+  slug        String
+  category    String?
+  description String?
+  websiteUrl  String?
+  logoAssetId String?
+  booth       String?
+  mapPoiId    String?
+  offer       String?
+  isPublic    Boolean @default(true)
+
+  @@unique([eventId, slug])
+}
+
+model Artist {
+  id          String   @id @default(cuid())
+  eventId     String
+  event       Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name        String
+  slug        String
+  bio         String?
+  imageAssetId String?
+  spotifyUrl  String?
+  instagramUrl String?
+  facebookUrl String?
+  websiteUrl  String?
+  programItems ProgramItem[]
+
+  @@unique([eventId, slug])
+}
+
+model ProgramItem {
+  id          String   @id @default(cuid())
+  eventId     String
+  event       Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  artistId    String?
+  artist      Artist?  @relation(fields: [artistId], references: [id], onDelete: SetNull)
+  title       String
+  slug        String
+  description String?
+  startsAt    DateTime
+  endsAt      DateTime
+  place       String?
+  category    String?
+  imageAssetId String?
+  externalUrl String?
+  status      PublicationStatus @default(PUBLISHED)
+
+  @@unique([eventId, slug])
+}
+
+model FaqCategory {
+  id        String @id @default(cuid())
+  name      String
+  slug      String @unique
+  sortOrder Int    @default(100)
+  items     FaqItem[]
+}
+
+model FaqItem {
+  id          String   @id @default(cuid())
+  eventId     String?
+  event       Event?   @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  categoryId  String?
+  category    FaqCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  question    String
+  answer      String
+  sortOrder   Int      @default(100)
+  isPublished Boolean  @default(false)
+}
+
+model NewsArticle {
+  id          String            @id @default(cuid())
+  eventId     String?
+  event       Event?            @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  title       String
+  slug        String            @unique
+  excerpt     String?
+  body        Json
+  imageAssetId String?
+  status      PublicationStatus @default(DRAFT)
+  publishedAt DateTime?
+  seoTitle    String?
+  seoDescription String?
+}
+
+model GalleryAlbum {
+  id          String  @id @default(cuid())
+  year        Int
+  title       String
+  slug        String  @unique
+  description String?
+  images      GalleryImage[]
+}
+
+model GalleryImage {
+  id          String @id @default(cuid())
+  albumId     String
+  album       GalleryAlbum @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  mediaAssetId String
+  caption     String?
+  photographer String?
+  sortOrder   Int @default(100)
+}
+
+model TruckProfile {
+  id                  String             @id @default(cuid())
+  eventId             String
+  event               Event              @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  ownerUserId         String?
+  owner               User?              @relation(fields: [ownerUserId], references: [id], onDelete: SetNull)
+  pretixOrderCode     String?
+  pretixPositionId    Int?
+  truckNumber         String?
+  slug                String
+  companyName         String?
+  driverName          String?
+  registrationNumber  String?
+  publicRegistration  Boolean            @default(false)
+  country             String?
+  city                String?
+  brand               String?
+  model               String?
+  modelYear           Int?
+  engineType          String?
+  enginePower         String?
+  bodywork            String?
+  category            String?
+  competitionClass    String?
+  description         String?
+  instagramUrl        String?
+  facebookUrl         String?
+  websiteUrl          String?
+  photographer        String?
+  mainImageAssetId    String?
+  publicConsent       Boolean            @default(false)
+  status              TruckProfileStatus @default(INCOMPLETE)
+  area                String?
+  row                 String?
+  placeNumber         String?
+  mapPoiId            String?
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  images              TruckProfileMedia[]
+  votes               Vote[]
+
+  @@unique([eventId, slug])
+  @@unique([eventId, truckNumber])
+}
+
+model TruckProfileMedia {
+  id             String @id @default(cuid())
+  truckProfileId String
+  truckProfile   TruckProfile @relation(fields: [truckProfileId], references: [id], onDelete: Cascade)
+  mediaAssetId   String
+  sortOrder      Int @default(100)
+}
+
+model EventMap {
+  id          String @id @default(cuid())
+  eventId     String
+  event       Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name        String
+  baseAssetId String?
+  width       Int
+  height      Int
+  pois        MapPoi[]
+  routes      MapRoute[]
+}
+
+model MapPoi {
+  id          String @id @default(cuid())
+  mapId       String
+  map         EventMap @relation(fields: [mapId], references: [id], onDelete: Cascade)
+  name        String
+  slug        String
+  category    String
+  icon        String
+  description String?
+  x           Float
+  y           Float
+  openingHours String?
+  linkUrl     String?
+
+  @@unique([mapId, slug])
+}
+
+model MapRoute {
+  id          String @id @default(cuid())
+  mapId       String
+  map         EventMap @relation(fields: [mapId], references: [id], onDelete: Cascade)
+  name        String
+  slug        String
+  description String?
+  path        Json
+
+  @@unique([mapId, slug])
+}
+
+model QrSign {
+  id            String   @id @default(cuid())
+  eventId       String
+  label         String
+  targetType    String
+  targetUrl     String
+  trackingCode  String   @unique
+  scans         Int      @default(0)
+  createdAt     DateTime @default(now())
+}
+
+model VotePoll {
+  id                   String               @id @default(cuid())
+  eventId              String
+  event                Event                @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name                 String
+  slug                 String
+  opensAt              DateTime
+  closesAt             DateTime
+  maxVotes             Int                  @default(1)
+  verificationMode     VoteVerificationMode @default(EMAIL_REQUIRED)
+  includedCategories   String[]             @default([])
+  publicResultsAt      DateTime?
+  votes                Vote[]
+
+  @@unique([eventId, slug])
+}
+
+model Vote {
+  id             String       @id @default(cuid())
+  pollId         String
+  poll           VotePoll     @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  truckProfileId String
+  truckProfile   TruckProfile @relation(fields: [truckProfileId], references: [id], onDelete: Cascade)
+  voterHash      String
+  ticketHash     String?
+  abuseSignals   Json?
+  createdAt      DateTime     @default(now())
+
+  @@unique([pollId, voterHash, truckProfileId])
+}
+
+model PretixOrderReadModel {
+  id              String   @id @default(cuid())
+  eventId         String
+  event           Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  organizerSlug   String
+  pretixEventSlug String
+  code            String
+  buyerEmail      String?
+  buyerName       String?
+  status          String
+  total           String?
+  currency        String?
+  raw             Json
+  lastSyncedAt    DateTime @default(now())
+  positions       PretixOrderPositionReadModel[]
+  userLinks       UserOrderLink[]
+
+  @@unique([organizerSlug, pretixEventSlug, code])
+}
+
+model PretixOrderPositionReadModel {
+  id             String @id @default(cuid())
+  orderId        String
+  order          PretixOrderReadModel @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  pretixPositionId Int
+  itemId         Int?
+  variationId    Int?
+  itemName       String?
+  admission      Boolean @default(false)
+  secretHash     String?
+  checkinState   String?
+  raw            Json
+
+  @@unique([orderId, pretixPositionId])
+}
+
+model UserOrderLink {
+  id        String @id @default(cuid())
+  userId    String
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderId   String
+  order     PretixOrderReadModel @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  verifiedAt DateTime @default(now())
+
+  @@unique([userId, orderId])
+}
+
+model PretixWebhookEvent {
+  id             String   @id @default(cuid())
+  idempotencyKey String   @unique
+  notificationId String?  @unique
+  action         String
+  organizerSlug  String?
+  eventSlug      String?
+  orderCode      String?
+  payload        Json
+  status         String   @default("RECEIVED")
+  error          String?
+  receivedAt     DateTime @default(now())
+  processedAt    DateTime?
+}
+
+model IntegrationError {
+  id        String   @id @default(cuid())
+  source    String
+  severity  String
+  message   String
+  context   Json?
+  resolvedAt DateTime?
+  createdAt DateTime @default(now())
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  eventId   String?
+  type      String
+  path      String?
+  subject   String?
+  metadata  Json?
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  actorUserId String?
+  actor       User?    @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+  action      String
+  objectType  String
+  objectId    String?
+  oldValue    Json?
+  newValue    Json?
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+}

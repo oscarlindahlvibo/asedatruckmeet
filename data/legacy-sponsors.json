@@ -1,0 +1,626 @@
+{
+  "importedAt": "2026-08-15T08:14:32.110Z",
+  "sourceUrl": "https://asedatruckmeet.se/",
+  "sponsors": [
+    {
+      "name": "Uppvidinge Kommun",
+      "slug": "uppvidinge-kommun",
+      "tier": "Platinapartner",
+      "description": "Vi kan stolt presentera att Uppvidinge Kommun går in som Platinapartner till årets evenemang! Uppvidinge Kommun har ett tätt samarbete med Truckmeet i syd ideell förening för att evenemanget ska kunna genomföras på ett tryggt och ordnat sätt!",
+      "websiteUrl": "http://dekaltrim.nu",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/3853-8fcec3eb/Logotyp_uppvidinge_staende_original.jpg",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/uppvidinge-kommun.webp"
+    },
+    {
+      "name": "JSC Koncernen",
+      "slug": "jsc-koncernen",
+      "tier": "Huvudpartner",
+      "description": "Vi kan stolt presentera JSC Koncernen som huvudpartner för Åseda Truckmeet även 2026. JSC Koncernen - Vi löser dina logistikproblem på ett enkelt sätt. Vi kan stolt presentera att Uppvidinge Kommun går in som Platinapartner till årets evenemang! Uppvidinge Kommun har ett tätt samarbete med Truckmeet i syd ideell förening för att evenemanget ska kunna genomföras på ett tryggt och ordnat sätt!",
+      "websiteUrl": "https://vibofast.se",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/3821-d9abdff8/JSC-Koncernen-1-1400x560.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/jsc-koncernen.png"
+    },
+    {
+      "name": "Kompetensportalen.se",
+      "slug": "kompetensportalen-se",
+      "tier": "Guldpartner",
+      "description": "Kompetensportalen.se erbjuder kurser i Arbete på väg (APV 1.1-1.3) och har ett ständigt växande kursutbud till Sveriges vassaste priser.",
+      "websiteUrl": "https://www.kompetensportalen.se",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/2100-9ec25ecd/4816F237-9143-4E50-BE32-B6C994B5A127.jpeg",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/kompetensportalen-se.webp"
+    },
+    {
+      "name": "VIBO Fastigheter",
+      "slug": "vibo-fastigheter",
+      "tier": "Guldpartner",
+      "description": "Vibo Fastigheter erbjuder lägenheter i Hultsfreds kommun.",
+      "websiteUrl": "https://vibofast.se",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/3811-c1e81e45/Vibo%20svart%20png%20utan%20bg.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/vibo-fastigheter.png"
+    },
+    {
+      "name": "Mias Butik - Frendo Åseda",
+      "slug": "mias-butik-frendo-a-seda",
+      "tier": "Guldpartner",
+      "description": "Passerar du Åseda? Då är Mias Butik - Frendo det givna stoppet. Fyll på med en korv eller bulle samtidigt som lastbilen får lite diesel utanför.",
+      "websiteUrl": null,
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/3812-4b8713e2/frendo-logo.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/mias-butik-frendo-a-seda.png"
+    },
+    {
+      "name": "Kronqvists Åkeri",
+      "slug": "kronqvists-a-keri",
+      "tier": "Guldpartner",
+      "description": "Kronqvists Lastbilsåkeri är ett familjeföretag inom entreprenad i 3:e generation.",
+      "websiteUrl": "http://www.kronqvists.se",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4067-a0a60810/Kronqvist-logo-with-white-shade-a-blue-background-300x62.jpg",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/kronqvists-a-keri.webp"
+    },
+    {
+      "name": "Dekaltrim.nu",
+      "slug": "dekaltrim-nu",
+      "tier": "Guldpartner",
+      "description": "Vi ställer ut på Åseda Truckmeet med vårt rullande tryckeri och tillverkar skurna texter, logos och personliga dekaler på beställning!",
+      "websiteUrl": "http://dekaltrim.nu",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/3854-088f6bd3/dekaltrim_tvaradig1.jpg",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/dekaltrim-nu.webp"
+    },
+    {
+      "name": "ProfilGruppen",
+      "slug": "profilgruppen",
+      "tier": "Guldpartner",
+      "description": "ProfilGruppen är ett svenskt bolag som utvecklar och tillverkar kundanpassade profiler och komponenter i aluminium.",
+      "websiteUrl": "http://www.profilgruppen.se",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/3856-83d54cf3/PG.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/profilgruppen.png"
+    },
+    {
+      "name": "Högsby Sparbank",
+      "slug": "ho-gsby-sparbank",
+      "tier": "Guldpartner",
+      "description": "Lite skämtsamt brukar vi säga att en riktig bank har huvudkontoret på Storgatan. Det är förstås inte hela sanningen. Men som sparbank har vi med oss ett arv som är helt unikt: Vår verksamhet är verkligen lokal. Vårt huvudkontor finns på orten och den närhet vi har till våra kunder gör att vi känner dem bättre, och dom oss, än många andra aktörer i branschen.",
+      "websiteUrl": "http://www.hogsbysparbank.se",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/3876-8ca8d237/hogsby%20sparb.jpeg",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/ho-gsby-sparbank.webp"
+    },
+    {
+      "name": "SLP AB",
+      "slug": "slp-ab",
+      "tier": "Guldpartner",
+      "description": "I våra produktionslokaler i Övertorneå tillverkas alla våra olika ekipage. På ca 7000 m3 tillverkas årligen cirka 100 enheter idag för leverans till Sverige, Norge och Finland. Vi tillverkar allt från chassier och hjälpramar till flak i våra manuella svetsstationer.",
+      "websiteUrl": "https://www.slpab.com/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4069-71bdc56f/Namnlo%CC%88s%20design%20%281%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/slp-ab.png"
+    },
+    {
+      "name": "RB Logistik",
+      "slug": "rb-logistik",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://www.facebook.com/RBLOGISTIK/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4073-9685b2e1/Namnlo%CC%88s%20design%20%282%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/rb-logistik.png"
+    },
+    {
+      "name": "Holmsjö Bildemontering",
+      "slug": "holmsjo-bildemontering",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://www.holmsjobildemontering.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4074-a4c14acf/Namnlo%CC%88s%20design%20%283%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/holmsjo-bildemontering.png"
+    },
+    {
+      "name": "Kronobärgaren - Rottne Motorverkstad",
+      "slug": "kronoba-rgaren-rottne-motorverkstad",
+      "tier": "Guldpartner",
+      "description": "Vi ställer ut på Åseda Truckmeet och visar upp våra fordon! Transport och bärgning av lätta, tunga, svåra och unika fordon och saker.",
+      "websiteUrl": "https://www.facebook.com/kronobargaren/?locale=sv_SE",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4075-c214619a/Namnlo%CC%88s%20design%20%284%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/kronoba-rgaren-rottne-motorverkstad.png"
+    },
+    {
+      "name": "Däck Team - Åseda Gummiverkstad",
+      "slug": "da-ck-team-a-seda-gummiverkstad",
+      "tier": "Guldpartner",
+      "description": "Välkomna till Däckteam i Åseda. Vi säljer och byter däck och fälgar till din bil. Vi bedriver försäljning av däck och fälg mot såväl privatpersoner som företag med tjänstebilsflotta eller transportverksamhet.",
+      "websiteUrl": "https://www.dackteam.se/aseda-gummiverkstad",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4076-426e972c/Namnlo%CC%88s%20design%20%285%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/da-ck-team-a-seda-gummiverkstad.png"
+    },
+    {
+      "name": "Finnvedens Lastvagnar",
+      "slug": "finnvedens-lastvagnar",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://www.dealer.volvotrucks.se/finnvedenslast/sv-se/about-us1.html",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4077-fa79a0ad/Namnlo%CC%88s%20design%20%286%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/finnvedens-lastvagnar.png"
+    },
+    {
+      "name": "Spaljisten",
+      "slug": "spaljisten",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://spaljisten.com/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4078-50c7d7a1/Namnlo%CC%88s%20design%20%287%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/spaljisten.png"
+    },
+    {
+      "name": "Sven Granflo Åkeri AB",
+      "slug": "sven-granflo-a-keri-ab",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://www.granfloakeri.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4085-9139c814/A%CC%8Aseda%20Truckmeet%20%E2%80%93%20A%CC%8Asedas%20snabbast%20va%CC%88xande%20folkfest.jpeg",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/sven-granflo-a-keri-ab.webp"
+    },
+    {
+      "name": "Runes Bensin",
+      "slug": "runes-bensin",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://runes.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4087-71a44989/Namnlo%CC%88s%20design%20%288%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/runes-bensin.png"
+    },
+    {
+      "name": "Däckcenter I Vetlanda",
+      "slug": "da-ckcenter-i-vetlanda",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://dackcenter.eu/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4088-bc4c66c3/Namnlo%CC%88s%20design%20%289%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/da-ckcenter-i-vetlanda.png"
+    },
+    {
+      "name": "Storms Inredningar",
+      "slug": "storms-inredningar",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://www.instagram.com/jimmy.storm95/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4126-6bcbd756/sponsor%20%284%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/storms-inredningar.png"
+    },
+    {
+      "name": "J-Son Schakt AB",
+      "slug": "j-son-schakt-ab",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": null,
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4089-cb49c382/jsson.jpeg",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/j-son-schakt-ab.webp"
+    },
+    {
+      "name": "Fagerhults Maskin",
+      "slug": "fagerhults-maskin",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://fagerhultsmaskin.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4090-3c3df7b5/Namnlo%CC%88s%20design%20%2810%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/fagerhults-maskin.png"
+    },
+    {
+      "name": "Smartab",
+      "slug": "smartab",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://www.smartab.com/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4091-67bdce09/Autosmart-Original-Logo_Web.jpg",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/smartab.webp"
+    },
+    {
+      "name": "SverigeExpressen",
+      "slug": "sverigeexpressen",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://sverigeexpressen.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4092-e639e761/Namnlo%CC%88s%20design%20%2811%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/sverigeexpressen.png"
+    },
+    {
+      "name": "Åseda Bygg&Järn",
+      "slug": "a-seda-bygg-ja-rn",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://www.xn--sedabyggprodukter-7qb.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4103-0acd8896/Aseda-bygg-o-jarn.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/a-seda-bygg-ja-rn.png"
+    },
+    {
+      "name": "SL Trailer",
+      "slug": "sl-trailer",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://sltrailer.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4104-1363c8a2/sl-trailer-trans.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/sl-trailer.png"
+    },
+    {
+      "name": "VALOSTORE",
+      "slug": "valostore",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://www.valostore.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4150-272ba8cc/sponsor%20%2810%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/valostore.png"
+    },
+    {
+      "name": "Truckstyle Sweden",
+      "slug": "truckstyle-sweden",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://truckstylesweden.com/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4151-c97fdac2/sponsor%20%289%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/truckstyle-sweden.png"
+    },
+    {
+      "name": "JLB Mark & Asfalt",
+      "slug": "jlb-mark-asfalt",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://jlbasfalt.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4186-0a9fec3f/sponsor%20%2824%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/jlb-mark-asfalt.png"
+    },
+    {
+      "name": "Bilservice i Åseda",
+      "slug": "bilservice-i-a-seda",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://bilserviceaseda.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4105-48f664d8/Ska%CC%88rmavbild%202026-02-26%20kl.%2013.51.26.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/bilservice-i-a-seda.png"
+    },
+    {
+      "name": "Granflo Bygg AB",
+      "slug": "granflo-bygg-ab",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://granflobygg.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4107-59bb71fb/Namnlo%CC%88s%20design%20%2812%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/granflo-bygg-ab.png"
+    },
+    {
+      "name": "VFG Utbildning",
+      "slug": "vfg-utbildning",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://vfg.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4117-3a441cb2/Namnlo%CC%88s%20design%20%2815%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/vfg-utbildning.png"
+    },
+    {
+      "name": "Swelash AB",
+      "slug": "swelash-ab",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://www.swelash.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4183-ea1cded9/sponsor%20%2823%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/swelash-ab.png"
+    },
+    {
+      "name": "Jinert",
+      "slug": "jinert",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://jinert.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4191-e9ecc931/sponsor%20%2825%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/jinert.png"
+    },
+    {
+      "name": "JSC Projekt",
+      "slug": "jsc-projekt",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://www.jscforvaltning.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4192-9c163dee/sponsor%20%2826%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/jsc-projekt.png"
+    },
+    {
+      "name": "Maskin & Mekan i Växjö AB",
+      "slug": "maskin-mekan-i-va-xjo-ab",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://maskinomekan.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4265-818e64dd/sponsor%20%2827%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/maskin-mekan-i-va-xjo-ab.png"
+    },
+    {
+      "name": "Granflo Supply AB",
+      "slug": "granflo-supply-ab",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "https://granflobygg.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4932-9f224536/Logga%20Supply%20%281%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/granflo-supply-ab.png"
+    },
+    {
+      "name": "Bli en del av Åseda Truckmeet!",
+      "slug": "bli-en-del-av-a-seda-truckmeet",
+      "tier": "Guldpartner",
+      "description": "",
+      "websiteUrl": "http://asedatruckmeet.se",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4180-174be55f/sponsor%20%2822%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/bli-en-del-av-a-seda-truckmeet.png"
+    },
+    {
+      "name": "SVEA",
+      "slug": "svea",
+      "tier": "Silverpartner",
+      "description": "Svea är en koncern med finansiell verksamhet i ett flertal europeiska länder. Med mer än fyrtio års erfarenhet av att hjälpa företag med deras likviditet är vi ett naturligt val för många företagare när de behöver en finansieringspartner. Sveas vision är att vara en ledande finansiell aktör i Europa.",
+      "websiteUrl": "http://www.svea.com/sv-se",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4123-b90860a0/sponsor%20%282%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/svea.png"
+    },
+    {
+      "name": "B-Trans Norra Vi",
+      "slug": "b-trans-norra-vi",
+      "tier": "Silverpartner",
+      "description": "B-Trans AB är ett svenskt åkeriföretag med säte i Ydre, Östergötland. Bolaget grundades 1988 och är verksamt inom vägtransport och godstransporter. Företaget har cirka 15 anställda och bedriver åkeriverksamhet med tillhörande transporttjänster.",
+      "websiteUrl": "https://www.instagram.com/btransab/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4115-09793ea2/Namnlo%CC%88s%20design%20%2813%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/b-trans-norra-vi.png"
+    },
+    {
+      "name": "Värlebo Skogstransporter",
+      "slug": "va-rlebo-skogstransporter",
+      "tier": "Silverpartner",
+      "description": "Värlebo Skogstransporter AB är ett åkeriföretag i Högsby som specialiserar sig på timmer- och flistransporter inom skogsindustrin. Företaget grundades 2007 och bedriver skogstransporter med egna timmerbilar.",
+      "websiteUrl": "https://www.instagram.com/varleboskogstransporter/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4127-3b6fe1b3/sponsor%20%283%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/va-rlebo-skogstransporter.png"
+    },
+    {
+      "name": "BR. Israelsson",
+      "slug": "br-israelsson",
+      "tier": "Silverpartner",
+      "description": "Br.Israelsson Kalmar AB är ett transportföretag med säte i Kalmar som bedriver lastbilstransporter och logistik. Bolaget startades 2023 och erbjuder transportlösningar med fokus på kvalitet, punktlighet och kundanpassade uppdrag.",
+      "websiteUrl": "https://www.facebook.com/p/Br-Israelsson-Kalmar-AB-61561018386980/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4122-3d177241/sponsor.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/br-israelsson.png"
+    },
+    {
+      "name": "Sjögrens Åkeri",
+      "slug": "sjo-grens-a-keri",
+      "tier": "Silverpartner",
+      "description": "Sjögrens Åkeri (Åkeri AB Bertil Sjögren) är ett transportföretag med säte i Lessebo. Bolaget grundades 1970 och bedriver åkeri- och entreprenadverksamhet inom godstransporter.",
+      "websiteUrl": "https://www.instagram.com/sjogrensakeri/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4120-4860228a/Namnlo%CC%88s%20design%20%2817%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/sjo-grens-a-keri.png"
+    },
+    {
+      "name": "CLEAR DEFEND",
+      "slug": "clear-defend",
+      "tier": "Silverpartner",
+      "description": "",
+      "websiteUrl": "https://www.cleardefend.se",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4114-cdd1349d/Logotyp%20Clear%20Defend%20Sv%20klar%202025.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/clear-defend.png"
+    },
+    {
+      "name": "Jarls Åkeri",
+      "slug": "jarls-a-keri",
+      "tier": "Silverpartner",
+      "description": "Jarls Åkeri är ett skogstransportföretag med bas i Broakulla. Företaget grundades 1949 och arbetar främst med transporter av rundvirke inom trädindustrin i södra Sverige. Verksamheten drivs idag av familjen Jarl och omfattar åtta timmerbilar samt egen verkstad.",
+      "websiteUrl": "https://www.jarlsakeri.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4116-37404499/Namnlo%CC%88s%20design%20%2814%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/jarls-a-keri.png"
+    },
+    {
+      "name": "FT-Produktion",
+      "slug": "ft-produktion",
+      "tier": "Silverpartner",
+      "description": "FT Produktion är ett småländskt företag verksamt inom tillverkning och industriell produktion. Företaget erbjuder tjänster inom produktion och bearbetning med fokus på kvalitet och kundanpassade lösningar.",
+      "websiteUrl": "https://ft-produktion.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4137-bd5d2212/sponsor%20%285%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/ft-produktion.png"
+    },
+    {
+      "name": "BE-GE",
+      "slug": "be-ge",
+      "tier": "Silverpartner",
+      "description": "Transportbranschen handlar om förtroende. Med vår och Scanias långa tradition av att leverera exakt det som ditt företag behöver. Med en uppsjö av valmöjligheter och ett stort utbud modulära konfigurationer är möjligheterna oändliga. Be-Ge Lastbilar AB är auktoriserad återförsäljare för Scania lastbilar sedan 1941.",
+      "websiteUrl": "http://www.be-ge.se",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4138-611f9ccc/Aseda-Tung-Service-500-%C3%97-220-px%20%282%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/be-ge.png"
+    },
+    {
+      "name": "Allt i plåt",
+      "slug": "allt-i-pla-t",
+      "tier": "Silverpartner",
+      "description": "Allt i Plåt är ett högteknologiskt företag med småländsk företagsamhet och entreprenörsanda. Vi tillverkar hytter till tunga fordon och utför fordonsanpassning av färdtjänst och specialfordon.",
+      "websiteUrl": "https://www.aip-cab.se/allt-i-plat/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4140-498bad97/sponsor%20%286%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/allt-i-pla-t.png"
+    },
+    {
+      "name": "Antes Lyft & Transport",
+      "slug": "antes-lyft-transport",
+      "tier": "Silverpartner",
+      "description": "",
+      "websiteUrl": "https://anteskranbilar.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4147-76bd698d/sponsor%20%287%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/antes-lyft-transport.png"
+    },
+    {
+      "name": "OL Maskintjänst AB",
+      "slug": "ol-maskintja-nst-ab",
+      "tier": "Silverpartner",
+      "description": "OL Maskintjänst är ett entreprenadföretag verksamt inom mark- och maskintjänster. Företaget erbjuder flexibla lösningar inom anläggnings- och entreprenadarbeten med fokus på kvalitet och pålitligt utförande.",
+      "websiteUrl": null,
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4152-c7423805/sponsor%20%2811%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/ol-maskintja-nst-ab.png"
+    },
+    {
+      "name": "JT Wahlbergs Bygg",
+      "slug": "jt-wahlbergs-bygg",
+      "tier": "Silverpartner",
+      "description": "Vår vision är att förverkliga drömmar. Wahlbergs Bygg i Åseda hjälper dig med allt i och kring din fastighet! Takbyte, dörrbyte, altaner, trägolv, kök, flytta innerväggar med mera. Vi hjälper dig även med badrumsrenoveringen, tillbyggnader och nyproduktion! Allt helt enkelt!",
+      "websiteUrl": "https://jtwahlbergsbygg.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4153-73143374/sponsor%20%2812%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/jt-wahlbergs-bygg.png"
+    },
+    {
+      "name": "Blomstermåla Åkeri",
+      "slug": "blomsterma-la-a-keri",
+      "tier": "Silverpartner",
+      "description": "Blomstermåla Åkeri AB är ett familjeföretag i Mönsterås som erbjuder transporttjänster i Sverige, Norden och Västeuropa. Företaget arbetar bland annat med godstransporter, kranlyft och trucklogistik och samarbetar med Mönsterås LBC.",
+      "websiteUrl": "https://www.blomstermalaakeriab.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4154-e3e95667/sponsor%20%2813%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/blomsterma-la-a-keri.png"
+    },
+    {
+      "name": "Alvinssons Mönsterås",
+      "slug": "alvinssons-mo-nstera-s",
+      "tier": "Silverpartner",
+      "description": "Alvinssons AB är ett entreprenadföretag i Mönsterås som erbjuder maskin- och anläggningstjänster såsom grävarbeten, slamsugning, snöröjning och markarbeten. Företaget startades 1966 och arbetar främst mot företag, offentlig sektor och privatpersoner i Kalmar län.",
+      "websiteUrl": "https://www.alvinssons.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4155-8624f538/alvinssons-logo.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/alvinssons-mo-nstera-s.png"
+    },
+    {
+      "name": "Tabergs",
+      "slug": "tabergs",
+      "tier": "Silverpartner",
+      "description": "Tabergs Åkeri AB är ett transportföretag specialiserat på special-, maskin- och projekttransporter. Företaget erbjuder allt från enstaka transporter till kompletta logistiklösningar och arbetar med överdimensionerat och tungt gods i Sverige och övriga Europa.",
+      "websiteUrl": "https://www.tabergsakeri.com/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4156-34f5bb6a/sponsor%20%2815%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/tabergs.png"
+    },
+    {
+      "name": "MT Eksjö",
+      "slug": "mt-eksjo",
+      "tier": "Silverpartner",
+      "description": "MT Eksjö (Eksjö Maskin & Truck AB) är en svensk tillverkare av påbyggnationer för lastbilar och släp, med särskilt fokus på flis- och skogstransporter. Företaget utvecklar och bygger specialanpassade lösningar för tung trafik i nära samarbete med sina kunder.",
+      "websiteUrl": "https://motab.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4159-af0b31d1/sponsor%20%2817%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/mt-eksjo.png"
+    },
+    {
+      "name": "Bennesveds Åkeri",
+      "slug": "bennesveds-a-keri",
+      "tier": "Silverpartner",
+      "description": "Bennesveds Åkeri AB är ett åkeriföretag i Älghult som bedriver godstransporter med lastbil. Företaget erbjuder även service och reparation av tunga fordon samt teknisk service inom exempelvis AC och elektronik",
+      "websiteUrl": null,
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4172-be53822e/sponsor%20%2818%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/bennesveds-a-keri.png"
+    },
+    {
+      "name": "Tord Nilsson Åkeri",
+      "slug": "tord-nilsson-a-keri",
+      "tier": "Bronspartner",
+      "description": "Tord Nilssons Åkeri är ett familjeföretag baserat i Asarum. Företaget arbetar med transporter av bland annat avfall, asfalt och jordbruksprodukter.",
+      "websiteUrl": "https://www.tordnilsson.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4118-5ae94e22/Namnlo%CC%88s%20design%20%2816%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/tord-nilsson-a-keri.png"
+    },
+    {
+      "name": "Hotell Olof",
+      "slug": "hotell-olof",
+      "tier": "Bronspartner",
+      "description": "I centrala Åseda, ett stenkast från Glasriket, är vi belägna. Ett hotell under omvandling då vi som nya ägare ämnar renovera hela huset under kommande år.",
+      "websiteUrl": "https://vibofast.se",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4139-12ad0af6/olof.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/hotell-olof.png"
+    },
+    {
+      "name": "Medin's",
+      "slug": "medin-s",
+      "tier": "Bronspartner",
+      "description": "Medin’s Åkeri är ett fristående transportföretag som arbetar med transporter mellan Sverige och övriga Europa. Företaget erbjuder kyl-, frys- och värmetransporter och kör med svenska chaufförer.",
+      "websiteUrl": "https://medinsakeri.se/tjanster/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4158-6cd09942/sponsor%20%2816%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/medin-s.png"
+    },
+    {
+      "name": "Tak & Montage",
+      "slug": "tak-montage",
+      "tier": "Bronspartner",
+      "description": "Tak & Montage i Åseda AB är ett lokalt företag som arbetar med takläggning och montagearbeten.",
+      "websiteUrl": "https://tak-montage.com/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4173-f8267e5b/sponsor%20%2819%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/tak-montage.png"
+    },
+    {
+      "name": "Näshults Schaktmaskiner",
+      "slug": "na-shults-schaktmaskiner",
+      "tier": "Bronspartner",
+      "description": "Näshults Schaktmaskiner AB är ett familjeföretag som arbetar med produktion och leverans av ballast såsom sand, grus och makadam samt sorterad matjord.",
+      "websiteUrl": "https://www.nashultsschaktmaskiner.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4174-3235472b/sponsor%20%2820%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/na-shults-schaktmaskiner.png"
+    },
+    {
+      "name": "Lugna Rum Åseda",
+      "slug": "lugna-rum-a-seda",
+      "tier": "Bronspartner",
+      "description": "Lugna Rum är ett pensionat i centrala Åseda med boende i genuin sekelskiftesmiljö. Här erbjuds enkel- och dubbelrum för kortare eller längre vistelser.",
+      "websiteUrl": "https://bnb-lugnarum.se/",
+      "sourceLogoUrl": "https://asedatruckmeet.se/web/image/4175-b227ef2f/sponsor%20%2821%29.png",
+      "sourceUrl": "https://asedatruckmeet.se/",
+      "logoPath": "/imported-sponsors/lugna-rum-a-seda.png"
+    }
+  ]
+}
