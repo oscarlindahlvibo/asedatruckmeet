@@ -1,58 +1,84 @@
-import { useEffect, useMemo, useState } from "react";
-import { ArrowDownRight, ArrowRight, CalendarDays, MapPin, Menu, Radio, Ticket, Truck, X, Zap } from "lucide-react";
-import sponsors from "../data/legacy-sponsors.json";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from '@/lib/auth';
+import Layout from '@/components/Layout';
+import ProtectedRoute from '@/components/ProtectedRoute';
+import HomePage from '@/pages/HomePage';
+import AboutPage from '@/pages/AboutPage';
+import ArtistsPage from '@/pages/ArtistsPage';
+import SponsorsPage from '@/pages/SponsorsPage';
+import ShopPage from '@/pages/ShopPage';
+import RulesPage from '@/pages/RulesPage';
+import ContactPage from '@/pages/ContactPage';
+import VisitInfoPage from '@/pages/VisitInfoPage';
+import ProgramPage from '@/pages/ProgramPage';
+import NewsPage from '@/pages/NewsPage';
+import NewsArticlePage from '@/pages/NewsArticlePage';
+import FaqPage from '@/pages/FaqPage';
+import GalleryPage from '@/pages/GalleryPage';
+import TrucksPage from '@/pages/TrucksPage';
+import TruckProfilePage from '@/pages/TruckProfilePage';
+import AccountPage from '@/pages/AccountPage';
+import AccountLoginPage from '@/pages/AccountLoginPage';
+import MapPage from '@/pages/MapPage';
+import LoginPage from '@/pages/LoginPage';
+import AdminDashboardPage from '@/pages/AdminDashboardPage';
+import AdminEventsPage from '@/pages/AdminEventsPage';
+import AdminSponsorsPage from '@/pages/AdminSponsorsPage';
+import AdminArtistsPage from '@/pages/AdminArtistsPage';
+import AdminSettingsPage from '@/pages/AdminSettingsPage';
+import AdminCmsPage from '@/pages/AdminCmsPage';
+import AdminTrucksPage from '@/pages/AdminTrucksPage';
+import AdminOrdersPage from '@/pages/AdminOrdersPage';
+import AdminMapPage from '@/pages/AdminMapPage';
+import AdminVotePage from '@/pages/AdminVotePage';
 
-type TruckCard = { truckNumber: string; companyName: string; brand: string; model: string; city: string; category: string; imageUrl?: string | null; profileUrl?: string };
+function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          {/* Public site */}
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/om" element={<AboutPage />} />
+            <Route path="/artister" element={<ArtistsPage />} />
+            <Route path="/sponsorer" element={<SponsorsPage />} />
+            <Route path="/biljetter" element={<ShopPage />} />
+            <Route path="/regler" element={<RulesPage />} />
+            <Route path="/kontakt" element={<ContactPage />} />
+            <Route path="/besok" element={<VisitInfoPage />} />
+            <Route path="/program" element={<ProgramPage />} />
+            <Route path="/nyheter" element={<NewsPage />} />
+            <Route path="/nyheter/:id" element={<NewsArticlePage />} />
+            <Route path="/faq" element={<FaqPage />} />
+            <Route path="/galleri" element={<GalleryPage />} />
+            <Route path="/lastbilar" element={<TrucksPage />} />
+            <Route path="/lastbilar/:id" element={<TruckProfilePage />} />
+            <Route path="/karta" element={<MapPage />} />
+          </Route>
 
-const event = { year: 2027, date: "2-3 juli 2027", slug: "aseda-truckmeet-2027", pretix: import.meta.env.VITE_PRETIX_EVENT_URL ?? "https://pretix.example.com/truckmeet/2027/" };
-const tiers = ["Huvudpartner", "Platinapartner", "Guldpartner", "Silverpartner", "Bronspartner"];
-const fallbackTrucks: TruckCard[] = ["Scania 770S V8", "Volvo FH16 750", "Mercedes-Benz Actros L", "MAN TGX 18.640", "DAF XG+", "Iveco S-Way"].map((model, index) => ({ truckNumber: `B${String(127 + index).padStart(3, "0")}`, companyName: `DEMO ${["Johanssons Åkeri", "Smålands Transport", "Växjö Logistik", "Kronobergs Åkeri", "Sydkust Frakt", "Åseda Transport"][index]}`, brand: model.split(" ")[0], model, city: ["Kalmar", "Åseda", "Växjö", "Vetlanda", "Oskarshamn", "Hultsfred"][index], category: index % 2 ? "showtruck" : "dragbil", imageUrl: "https://asedatruckmeet.se/web/image/3834-8ed0e93c/A7400342.webp" }));
+          {/* Account (public auth) */}
+          <Route path="/konto/login" element={<AccountLoginPage />} />
+          <Route path="/konto" element={<AccountPage />} />
 
-function navigate(path: string) { window.history.pushState({}, "", path); window.dispatchEvent(new PopStateEvent("popstate")); window.scrollTo({ top: 0, behavior: "instant" }); }
+          {/* Admin login */}
+          <Route path="/admin/login" element={<LoginPage />} />
 
-function Logo() { return <a className="brand" href="/" onClick={(event) => { event.preventDefault(); navigate("/"); }}><span className="brand-logo"><img src="/aseda-truckmeet-logo.png" alt="Åseda Truckmeet" /></span><span><strong>ÅSEDA TRUCKMEET</strong><small>SMÅLAND · 2027</small></span></a>; }
-
-function Shell({ children }: { children: React.ReactNode }) {
-  const [open, setOpen] = useState(false);
-  const links = [["Eventet", "/"], ["Biljetter", "/biljetter"], ["Lastbilar", "/lastbilar"], ["Partners", "/partners"], ["Besök", "/besok"]];
-  return <><header className="site-header"><Logo /><nav className={open ? "nav is-open" : "nav"}>{links.map(([label, path]) => <a href={path} key={path} onClick={(event) => { event.preventDefault(); setOpen(false); navigate(path); }}>{label}</a>)}</nav><div className="header-actions"><a className="ticket-button" href="/biljetter" onClick={(event) => { event.preventDefault(); navigate("/biljetter"); }}><Ticket size={16} /> Biljetter</a><button className="menu-button" aria-label={open ? "Stäng meny" : "Öppna meny"} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></div></header>{children}<footer className="site-footer"><div><Logo /><p>Småland. Lastbilar. Folkfest.</p></div><div><strong>ÅSEDA TRUCKMEET 2027</strong><span>{event.date}</span><span>Åseda Folkets Park</span></div><div><strong>SNABBT</strong><a href="/biljetter" onClick={(e) => { e.preventDefault(); navigate("/biljetter"); }}>Biljetter</a><a href="/lastbilar" onClick={(e) => { e.preventDefault(); navigate("/lastbilar"); }}>Lastbilar</a><a href="/partners" onClick={(e) => { e.preventDefault(); navigate("/partners"); }}>Partners</a></div></footer></>;
+          {/* Admin */}
+          <Route path="/admin" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
+          <Route path="/admin/event" element={<ProtectedRoute><AdminEventsPage /></ProtectedRoute>} />
+          <Route path="/admin/sponsorer" element={<ProtectedRoute><AdminSponsorsPage /></ProtectedRoute>} />
+          <Route path="/admin/artister" element={<ProtectedRoute><AdminArtistsPage /></ProtectedRoute>} />
+          <Route path="/admin/installningar" element={<ProtectedRoute><AdminSettingsPage /></ProtectedRoute>} />
+          <Route path="/admin/innehall" element={<ProtectedRoute><AdminCmsPage /></ProtectedRoute>} />
+          <Route path="/admin/lastbilar" element={<ProtectedRoute><AdminTrucksPage /></ProtectedRoute>} />
+          <Route path="/admin/bestallningar" element={<ProtectedRoute><AdminOrdersPage /></ProtectedRoute>} />
+          <Route path="/admin/karta" element={<ProtectedRoute><AdminMapPage /></ProtectedRoute>} />
+          <Route path="/admin/rostning" element={<ProtectedRoute><AdminVotePage /></ProtectedRoute>} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
 }
 
-function Home() { return <>
-  <section className="hero">
-    <div className="hero-image"><img src="https://asedatruckmeet.se/web/image/3835-0e415e0c/DJI_0723.webp" alt="Belysta lastbilar på Åseda Truckmeet" /></div>
-    <div className="hero-index">01 <span>/</span> 04</div>
-    <div className="hero-content">
-      <p className="hero-kicker"><Radio size={14} /> Nästa kapitel · 2027</p>
-      <img className="hero-logo" src="/aseda-truckmeet-logo.png" alt="Åseda Truckmeet" />
-      <p className="eyebrow">{event.date} · Åseda Folkets Park</p>
-      <h1>Småland.<br /><em>Lastbilar.</em><br />Folkfest.</h1>
-      <p className="hero-lead">Showtrucks, krom, fordonsljus, musik och gemenskap. Sveriges råaste truckhelg är tillbaka.</p>
-      <div className="actions"><a className="button primary" href="/biljetter" onClick={(e) => { e.preventDefault(); navigate("/biljetter"); }}>Köp biljett <ArrowRight size={18} /></a><a className="button secondary" href="/lastbilar" onClick={(e) => { e.preventDefault(); navigate("/lastbilar"); }}>Anmäl lastbil</a></div>
-    </div>
-    <div className="hero-stamp"><CalendarDays size={18} /><strong>2—3</strong><span>JULI 2027</span><small>ÅSEDA · SMÅLAND</small></div>
-    <a className="hero-scroll" href="#show"><span>Upptäck Truckmeet</span><ArrowDownRight size={19} /></a>
-    <div className="hero-ticker"><span>ÅSEDA TRUCKMEET</span><span>CHROME / DIESEL / COMMUNITY</span><span>SMÅLAND 2027</span></div>
-  </section>
-  <section className="stats"><div><strong>187</strong><span>Anmälda lastbilar</span></div><div><strong>2</strong><span>Dagar av truckkultur</span></div><div><strong>5</strong><span>Sponsornivåer</span></div><div><strong>100%</strong><span>Småländsk folkfest</span></div></section>
-  <section className="home-show" id="show">
-    <div className="show-copy"><p className="eyebrow">Mer än en träff</p><h2>Här möts<br /><em>ljuset.</em></h2><p>En helg där motorn får ta plats. Där välpolerat krom möter dammiga hjul, mörkret fylls av ljus och varje ekipage har en historia.</p><div className="show-meta"><span><MapPin size={15} /> Åseda Folkets Park</span><span><Zap size={15} /> 2 dagar · 1 folkfest</span></div><a className="text-link" href="/lastbilar" onClick={(e) => { e.preventDefault(); navigate("/lastbilar"); }}>Se truckgalleriet <ArrowRight size={16} /></a></div>
-    <div className="show-images"><figure className="show-main"><img src="https://asedatruckmeet.se/web/image/3831-0f1c1eb6/DSC_2134.webp" alt="Lastbilar på Åseda Truckmeet" /><figcaption>01 / SHOWTRUCKS</figcaption></figure><figure className="show-side"><img src="https://asedatruckmeet.se/web/image/3835-0e415e0c/DJI_0723.webp" alt="Åseda Truckmeet från ovan" /><figcaption>02 / FOLKFEST</figcaption></figure></div>
-  </section>
-  <SponsorRunway />
-  <section className="intro"><p className="eyebrow">Åseda Truckmeet 2027</p><h2>Det börjar med en lastbil.<br /><em>Det slutar i gemenskap.</em></h2><p>En helg för förare, åkerier, entusiaster, familjer och alla som älskar ljudet av diesel och blänket i krom.</p><a className="text-link" href="/partners" onClick={(e) => { e.preventDefault(); navigate("/partners"); }}>Möt våra partners <ArrowRight size={16} /></a></section>
-</>; }
-
-function SponsorRunway() { return <section className="sponsors"><div className="section-head"><div><p className="eyebrow">Med på resan</p><h2>Våra partners</h2></div><a className="text-link" href="/partners" onClick={(e) => { e.preventDefault(); navigate("/partners"); }}>Alla partners <ArrowRight size={16} /></a></div>{tiers.map((tier) => { const items = sponsors.sponsors.filter((sponsor) => sponsor.tier === tier); if (!items.length) return null; const loop = tier === "Guldpartner" || tier === "Silverpartner" || tier === "Bronspartner"; return <div className={`sponsor-row ${loop ? "is-moving" : ""}`} key={tier}><span className="tier-label">{tier}</span><div className="sponsor-track">{[...items, ...(loop ? items : [])].map((sponsor, index) => <a className="sponsor-chip" href={sponsor.websiteUrl ?? "#"} target="_blank" rel="noreferrer" key={`${sponsor.slug}-${index}`}><img src={sponsor.logoPath} alt="" /><strong>{sponsor.name}</strong></a>)}</div></div>; })}</section>; }
-
-function PageHeader({ eyebrow, title, lead }: { eyebrow: string; title: string; lead: string }) { return <section className="page-header"><p className="eyebrow">{eyebrow}</p><h1>{title}</h1><p>{lead}</p></section>; }
-
-function Tickets() { return <><PageHeader eyebrow="Åseda Truckmeet · 2027" title="Biljetter" lead="Välj din biljett och fortsätt till den säkra Pretix-checkouten." /><section className="ticket-grid">{[{ title: "Helgpass", text: "Entré till hela Truckmeet-helgen.", price: "495 kr" }, { title: "Lördagsbiljett", text: "En full dag med showtrucks, krom och folkfest.", price: "295 kr" }, { title: "Utställningslastbil", text: "Anmäl din lastbil till årets Truckmeet.", price: "350 kr" }].map((ticket) => <article key={ticket.title}><span className="ticket-kicker">BILJETT</span><h2>{ticket.title}</h2><p>{ticket.text}</p><div><strong>{ticket.price}</strong><a className="button primary" href={event.pretix}>Välj <ArrowRight size={16} /></a></div></article>)}</section><section className="checkout"><p className="eyebrow">Säker checkout</p><h2>Slutför köpet i Pretix</h2><p>Betalning, order, QR-biljett och återbetalning hanteras av Pretix.</p><a className="button primary" href={event.pretix}>Öppna biljettköpet <ArrowRight size={18} /></a></section></>; }
-
-function Trucks() { const [trucks, setTrucks] = useState<TruckCard[]>(fallbackTrucks); const [search, setSearch] = useState(""); useEffect(() => { const base = import.meta.env.VITE_PUBLIC_API_BASE_URL; if (!base) return; fetch(`${base.replace(/\/$/, "")}/api/public/events/${event.slug}/trucks?limit=100`).then((response) => response.ok ? response.json() : null).then((data) => { if (data?.trucks?.length) setTrucks(data.trucks); }).catch(() => undefined); }, []); const filtered = useMemo(() => trucks.filter((truck) => `${truck.companyName} ${truck.brand} ${truck.model} ${truck.city} ${truck.truckNumber}`.toLowerCase().includes(search.toLowerCase())), [trucks, search]); return <><PageHeader eyebrow="Publika lastbilar" title="Truckgalleriet" lead="Möt ekipagen, åkerierna och människorna bakom årets show." /><div className="search"><input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Sök åkeri, modell, ort eller trucknummer" /><span>{filtered.length} lastbilar</span></div><section className="truck-grid">{filtered.map((truck) => <article className="truck-card" key={truck.truckNumber}><img src={truck.imageUrl ?? fallbackTrucks[0].imageUrl} alt={`${truck.companyName} ${truck.brand} ${truck.model}`} /><div><span>{truck.truckNumber}</span><h2>{truck.companyName}</h2><p>{truck.brand} {truck.model} · {truck.city}</p><a className="text-link" href={truck.profileUrl ?? `#${truck.truckNumber}`}>Se truckprofil <ArrowRight size={16} /></a></div></article>)}</section></>; }
-
-function Partners() { return <><PageHeader eyebrow="Med på resan" title="Partners" lead="Företagen som gör Åseda Truckmeet möjligt." /><section className="partner-levels">{tiers.map((tier) => { const items = sponsors.sponsors.filter((sponsor) => sponsor.tier === tier); return <section key={tier}><div className="section-head"><h2>{tier}</h2><span>{items.length} partners</span></div><div className="partner-grid">{items.map((sponsor) => <a href={sponsor.websiteUrl ?? "#"} target="_blank" rel="noreferrer" key={sponsor.slug}><img src={sponsor.logoPath} alt={sponsor.name} /><strong>{sponsor.name}</strong><p>{sponsor.description}</p></a>)}</div></section>; })}</section></>; }
-
-function SimplePage({ title, eyebrow, lead }: { title: string; eyebrow: string; lead: string }) { return <><PageHeader eyebrow={eyebrow} title={title} lead={lead} /><section className="info-panel"><Truck size={26} /><h2>Mer innehåll på väg</h2><p>Den här sektionen kopplas till Supabase och administrationsgränssnittet i nästa lager. Frontendens publika struktur är redan klar för appen.</p></section></>; }
-
-export function App() { const [path, setPath] = useState(window.location.pathname); useEffect(() => { const listener = () => setPath(window.location.pathname); window.addEventListener("popstate", listener); return () => window.removeEventListener("popstate", listener); }, []); let page: React.ReactNode = <Home />; if (path.startsWith("/biljetter")) page = <Tickets />; else if (path.startsWith("/lastbilar")) page = <Trucks />; else if (path.startsWith("/partners")) page = <Partners />; else if (path.startsWith("/besok")) page = <SimplePage eyebrow="Planera besöket" title="Besöksinfo" lead="Allt du behöver veta inför Truckmeet i Åseda." />; else if (path.startsWith("/admin")) page = <SimplePage eyebrow="Control" title="Admin" lead="Admin körs bakom ett separat Supabase Edge Function-lager." />; return <Shell><main>{page}</main></Shell>; }
+export default App;
