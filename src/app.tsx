@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ArrowRight, CalendarDays, Menu, Ticket, Truck, X } from "lucide-react";
+import { ArrowDownRight, ArrowRight, CalendarDays, MapPin, Menu, Radio, Ticket, Truck, X, Zap } from "lucide-react";
 import sponsors from "../data/legacy-sponsors.json";
 
 type TruckCard = { truckNumber: string; companyName: string; brand: string; model: string; city: string; category: string; imageUrl?: string | null; profileUrl?: string };
@@ -18,7 +18,30 @@ function Shell({ children }: { children: React.ReactNode }) {
   return <><header className="site-header"><Logo /><nav className={open ? "nav is-open" : "nav"}>{links.map(([label, path]) => <a href={path} key={path} onClick={(event) => { event.preventDefault(); setOpen(false); navigate(path); }}>{label}</a>)}</nav><div className="header-actions"><a className="ticket-button" href="/biljetter" onClick={(event) => { event.preventDefault(); navigate("/biljetter"); }}><Ticket size={16} /> Biljetter</a><button className="menu-button" aria-label={open ? "Stäng meny" : "Öppna meny"} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button></div></header>{children}<footer className="site-footer"><div><Logo /><p>Småland. Lastbilar. Folkfest.</p></div><div><strong>ÅSEDA TRUCKMEET 2027</strong><span>{event.date}</span><span>Åseda Folkets Park</span></div><div><strong>SNABBT</strong><a href="/biljetter" onClick={(e) => { e.preventDefault(); navigate("/biljetter"); }}>Biljetter</a><a href="/lastbilar" onClick={(e) => { e.preventDefault(); navigate("/lastbilar"); }}>Lastbilar</a><a href="/partners" onClick={(e) => { e.preventDefault(); navigate("/partners"); }}>Partners</a></div></footer></>;
 }
 
-function Home() { return <><section className="hero"><div className="hero-image"><img src="https://asedatruckmeet.se/web/image/3834-8ed0e93c/A7400342.webp" alt="Lastbil på Åseda Truckmeet" /></div><div className="hero-content"><img className="hero-logo" src="/aseda-truckmeet-logo.png" alt="Åseda Truckmeet" /><p className="eyebrow">{event.date} · Åseda Folkets Park</p><h1>Småland.<br /><em>Lastbilar.</em><br />Folkfest.</h1><p className="hero-lead">Showtrucks, krom, fordonsljus, musik och gemenskap. Sveriges råaste truckhelg är tillbaka.</p><div className="actions"><a className="button primary" href="/biljetter" onClick={(e) => { e.preventDefault(); navigate("/biljetter"); }}>Köp biljett <ArrowRight size={18} /></a><a className="button secondary" href="/lastbilar" onClick={(e) => { e.preventDefault(); navigate("/lastbilar"); }}>Anmäl lastbil</a></div></div><div className="hero-stamp"><CalendarDays size={18} /><strong>2—3</strong><span>JULI 2027</span></div></section><section className="stats"><div><strong>187</strong><span>Anmälda lastbilar</span></div><div><strong>2</strong><span>Dagar av truckkultur</span></div><div><strong>5</strong><span>Sponsornivåer</span></div><div><strong>100%</strong><span>Småländsk folkfest</span></div></section><SponsorRunway /><section className="intro"><p className="eyebrow">Åseda Truckmeet 2027</p><h2>Det börjar med en lastbil.<br /><em>Det slutar i gemenskap.</em></h2><p>En helg för förare, åkerier, entusiaster, familjer och alla som älskar ljudet av diesel och blänket i krom.</p><a className="text-link" href="/partners" onClick={(e) => { e.preventDefault(); navigate("/partners"); }}>Möt våra partners <ArrowRight size={16} /></a></section></>; }
+function Home() { return <>
+  <section className="hero">
+    <div className="hero-image"><img src="https://asedatruckmeet.se/web/image/3835-0e415e0c/DJI_0723.webp" alt="Belysta lastbilar på Åseda Truckmeet" /></div>
+    <div className="hero-index">01 <span>/</span> 04</div>
+    <div className="hero-content">
+      <p className="hero-kicker"><Radio size={14} /> Nästa kapitel · 2027</p>
+      <img className="hero-logo" src="/aseda-truckmeet-logo.png" alt="Åseda Truckmeet" />
+      <p className="eyebrow">{event.date} · Åseda Folkets Park</p>
+      <h1>Småland.<br /><em>Lastbilar.</em><br />Folkfest.</h1>
+      <p className="hero-lead">Showtrucks, krom, fordonsljus, musik och gemenskap. Sveriges råaste truckhelg är tillbaka.</p>
+      <div className="actions"><a className="button primary" href="/biljetter" onClick={(e) => { e.preventDefault(); navigate("/biljetter"); }}>Köp biljett <ArrowRight size={18} /></a><a className="button secondary" href="/lastbilar" onClick={(e) => { e.preventDefault(); navigate("/lastbilar"); }}>Anmäl lastbil</a></div>
+    </div>
+    <div className="hero-stamp"><CalendarDays size={18} /><strong>2—3</strong><span>JULI 2027</span><small>ÅSEDA · SMÅLAND</small></div>
+    <a className="hero-scroll" href="#show"><span>Upptäck Truckmeet</span><ArrowDownRight size={19} /></a>
+    <div className="hero-ticker"><span>ÅSEDA TRUCKMEET</span><span>CHROME / DIESEL / COMMUNITY</span><span>SMÅLAND 2027</span></div>
+  </section>
+  <section className="stats"><div><strong>187</strong><span>Anmälda lastbilar</span></div><div><strong>2</strong><span>Dagar av truckkultur</span></div><div><strong>5</strong><span>Sponsornivåer</span></div><div><strong>100%</strong><span>Småländsk folkfest</span></div></section>
+  <section className="home-show" id="show">
+    <div className="show-copy"><p className="eyebrow">Mer än en träff</p><h2>Här möts<br /><em>ljuset.</em></h2><p>En helg där motorn får ta plats. Där välpolerat krom möter dammiga hjul, mörkret fylls av ljus och varje ekipage har en historia.</p><div className="show-meta"><span><MapPin size={15} /> Åseda Folkets Park</span><span><Zap size={15} /> 2 dagar · 1 folkfest</span></div><a className="text-link" href="/lastbilar" onClick={(e) => { e.preventDefault(); navigate("/lastbilar"); }}>Se truckgalleriet <ArrowRight size={16} /></a></div>
+    <div className="show-images"><figure className="show-main"><img src="https://asedatruckmeet.se/web/image/3831-0f1c1eb6/DSC_2134.webp" alt="Lastbilar på Åseda Truckmeet" /><figcaption>01 / SHOWTRUCKS</figcaption></figure><figure className="show-side"><img src="https://asedatruckmeet.se/web/image/3835-0e415e0c/DJI_0723.webp" alt="Åseda Truckmeet från ovan" /><figcaption>02 / FOLKFEST</figcaption></figure></div>
+  </section>
+  <SponsorRunway />
+  <section className="intro"><p className="eyebrow">Åseda Truckmeet 2027</p><h2>Det börjar med en lastbil.<br /><em>Det slutar i gemenskap.</em></h2><p>En helg för förare, åkerier, entusiaster, familjer och alla som älskar ljudet av diesel och blänket i krom.</p><a className="text-link" href="/partners" onClick={(e) => { e.preventDefault(); navigate("/partners"); }}>Möt våra partners <ArrowRight size={16} /></a></section>
+</>; }
 
 function SponsorRunway() { return <section className="sponsors"><div className="section-head"><div><p className="eyebrow">Med på resan</p><h2>Våra partners</h2></div><a className="text-link" href="/partners" onClick={(e) => { e.preventDefault(); navigate("/partners"); }}>Alla partners <ArrowRight size={16} /></a></div>{tiers.map((tier) => { const items = sponsors.sponsors.filter((sponsor) => sponsor.tier === tier); if (!items.length) return null; const loop = tier === "Guldpartner" || tier === "Silverpartner" || tier === "Bronspartner"; return <div className={`sponsor-row ${loop ? "is-moving" : ""}`} key={tier}><span className="tier-label">{tier}</span><div className="sponsor-track">{[...items, ...(loop ? items : [])].map((sponsor, index) => <a className="sponsor-chip" href={sponsor.websiteUrl ?? "#"} target="_blank" rel="noreferrer" key={`${sponsor.slug}-${index}`}><img src={sponsor.logoPath} alt="" /><strong>{sponsor.name}</strong></a>)}</div></div>; })}</section>; }
 
