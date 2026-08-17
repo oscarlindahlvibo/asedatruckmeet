@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Session, User } from '@supabase/supabase-js';
-import { supabase } from '@/lib/supabase';
+import { supabase, supabaseAuth } from '@/lib/supabase';
 
 interface AuthContextValue {
   session: Session | null;
@@ -47,13 +47,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
+    supabaseAuth.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setLoading(false);
       void refreshAdminRole(data.session);
     });
 
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
+    const { data: listener } = supabaseAuth.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
       setLoading(false);
       void refreshAdminRole(newSession);
@@ -65,21 +65,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabaseAuth.auth.signInWithPassword({ email, password });
     return { error: error ? explainAuthError(error.message) : null };
   };
 
   const claimFirstAdmin = async (sessionToRefresh = session) => {
     const { data, error } = await supabase.rpc('claim_first_admin');
     if (!error) {
-      const currentSession = sessionToRefresh ?? (await supabase.auth.getSession()).data.session;
+      const currentSession = sessionToRefresh ?? (await supabaseAuth.auth.getSession()).data.session;
       await refreshAdminRole(currentSession);
     }
     return { claimed: data === true, error: error ? explainAuthError(error.message) : null };
   };
 
   const signUpFirstAdmin = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signUp({ email, password });
+    const { data, error } = await supabaseAuth.auth.signUp({ email, password });
     if (error) return { error: explainAuthError(error.message), confirmationRequired: false };
     if (!data.session) return { error: null, confirmationRequired: true };
 
@@ -89,7 +89,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    await supabaseAuth.auth.signOut();
   };
 
   return (

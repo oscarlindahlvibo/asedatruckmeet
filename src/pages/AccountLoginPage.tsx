@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/auth';
-import { supabase } from '@/lib/supabase';
+import { supabaseAuth } from '@/lib/supabase';
 import { Mail, Lock, Loader2, AlertCircle, ArrowLeft, Truck } from 'lucide-react';
 
 export default function AccountLoginPage() {
@@ -19,7 +19,7 @@ export default function AccountLoginPage() {
     setError(null);
 
     if (isSignUp) {
-      const { data, error } = await supabase.auth.signUp({ email, password });
+      const { data, error } = await supabaseAuth.auth.signUp({ email, password });
       if (error) {
         setError(error.message);
         setLoading(false);
