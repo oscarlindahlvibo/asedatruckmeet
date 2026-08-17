@@ -7,6 +7,27 @@
 - Edge Functions: none currently; future functions must use the `truckmeet-` prefix
 - Pretix, SMTP, S3 and Redis configuration remain app-specific environment variables
 
+### Expose the app schema through Supabase API
+
+The frontend uses PostgREST through the `truckmeet` schema. Creating the
+PostgreSQL schema alone is not enough: add it to the shared Supabase API
+configuration before deploying the frontend.
+
+For self-hosted Supabase, extend the PostgREST setting in the shared `.env`:
+
+```env
+PGRST_DB_SCHEMAS=public,storage,graphql_public,truckmeet
+```
+
+Then restart the shared stack:
+
+```bash
+docker compose up -d
+```
+
+If you use the Supabase dashboard instead, add `truckmeet` under API exposed
+schemas. Do not remove schemas used by the other applications.
+
 The migration creates all Prisma tables, enum types and foreign keys inside the
 `truckmeet` schema. It does not create or alter tables in `public`.
 

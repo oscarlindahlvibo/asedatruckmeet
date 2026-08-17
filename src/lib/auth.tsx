@@ -16,6 +16,13 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
+function explainAuthError(message: string) {
+  if (/invalid schema.*truckmeet/i.test(message)) {
+    return 'Supabase API exponerar inte schemat truckmeet ännu. Lägg till truckmeet i PGRST_DB_SCHEMAS och starta om Supabase.';
+  }
+  return message;
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
@@ -59,7 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    return { error: error?.message ?? null };
+    return { error: error ? explainAuthError(error.message) : null };
   };
 
   const claimFirstAdmin = async (sessionToRefresh = session) => {
@@ -68,12 +75,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const currentSession = sessionToRefresh ?? (await supabase.auth.getSession()).data.session;
       await refreshAdminRole(currentSession);
     }
-    return { claimed: data === true, error: error?.message ?? null };
+    return { claimed: data === true, error: error ? explainAuthError(error.message) : null };
   };
 
   const signUpFirstAdmin = async (email: string, password: string) => {
     const { data, error } = await supabase.auth.signUp({ email, password });
-    if (error) return { error: error.message, confirmationRequired: false };
+    if (error) return { error: explainAuthError(error.message), confirmationRequired: false };
     if (!data.session) return { error: null, confirmationRequired: true };
 
     setSession(data.session);
