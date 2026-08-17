@@ -12,6 +12,7 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const hasSetupError = new URLSearchParams(window.location.search).get('error') === 'not-admin';
   const setupMode = new URLSearchParams(window.location.search).get('setup') === '1';
+  const openAdminSignup = import.meta.env.VITE_ALLOW_ADMIN_SIGNUP === 'true';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +23,7 @@ export default function LoginPage() {
     if (error) {
       setError(error);
     } else {
-      if (setupMode || window.localStorage.getItem('truckmeet:first-admin-email') === email.trim().toLowerCase()) {
+      if (!openAdminSignup && (setupMode || window.localStorage.getItem('truckmeet:first-admin-email') === email.trim().toLowerCase())) {
         const claim = await claimFirstAdmin();
         if (claim.error || !claim.claimed) {
           setError(claim.error ?? 'Första admin är redan skapad.');

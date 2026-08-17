@@ -15,6 +15,7 @@ interface AuthContextValue {
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+const openAdminSignup = import.meta.env.VITE_ALLOW_ADMIN_SIGNUP === 'true';
 
 function explainAuthError(message: string) {
   if (/invalid schema.*truckmeet/i.test(message)) {
@@ -42,7 +43,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .select('role')
       .eq('user_id', nextSession.user.id)
       .maybeSingle();
-    setIsAdmin(!error && Boolean(data?.role));
+    setIsAdmin(openAdminSignup || (!error && Boolean(data?.role)));
     setAdminLoading(false);
   };
 
@@ -84,6 +85,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!data.session) return { error: null, confirmationRequired: true };
 
     setSession(data.session);
+    if (openAdminSignup) return { error: null, confirmationRequired: false };
     const result = await claimFirstAdmin(data.session);
     return { error: result.error ?? (result.claimed ? null : 'Första admin är redan skapad.'), confirmationRequired: false };
   };
