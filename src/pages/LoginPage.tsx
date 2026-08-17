@@ -6,7 +6,7 @@ import { Truck, Mail, Lock, Loader2, AlertCircle, ArrowLeft, UserPlus } from 'lu
 export default function LoginPage() {
   const { signIn, claimFirstAdmin } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(() => window.localStorage.getItem('truckmeet:first-admin-email') ?? '');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

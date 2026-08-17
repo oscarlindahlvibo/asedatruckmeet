@@ -11,15 +11,21 @@ export default function AdminSetupPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [existingAccount, setExistingAccount] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
     setMessage(null);
     setError(null);
+    setExistingAccount(false);
     const result = await signUpFirstAdmin(email, password);
     setLoading(false);
     if (result.error) {
+      if (/already registered|already exists|user exists/i.test(result.error)) {
+        window.localStorage.setItem('truckmeet:first-admin-email', email.trim().toLowerCase());
+        setExistingAccount(true);
+      }
       setError(result.error);
       return;
     }
@@ -48,6 +54,7 @@ export default function AdminSetupPage() {
             <div><label className="text-sm font-medium text-white/70 mb-2 block">E-post</label><div className="relative"><Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" /><input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:border-amber-500/50 focus:outline-none" placeholder="admin@asedatruckmeet.se" /></div></div>
             <div><label className="text-sm font-medium text-white/70 mb-2 block">Lösenord</label><div className="relative"><Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" /><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} minLength={8} required className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:border-amber-500/50 focus:outline-none" placeholder="Minst 8 tecken" /></div></div>
             {error && <div className="flex items-center gap-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3"><AlertCircle className="w-4 h-4 shrink-0" />{error}</div>}
+            {existingAccount && <Link to="/admin/login?setup=1" className="block text-center text-sm text-amber-400 hover:text-amber-300">Logga in med det befintliga kontot och aktivera första admin</Link>}
             {message && <div className="flex items-center gap-2 text-sm text-green-400 bg-green-500/10 border border-green-500/20 rounded-xl px-4 py-3"><CheckCircle className="w-4 h-4 shrink-0" />{message}</div>}
             <button type="submit" disabled={loading} className="btn-primary w-full disabled:opacity-50">{loading ? <><Loader2 className="w-5 h-5 animate-spin" /> Skapar konto...</> : 'Skapa första admin'}</button>
           </form>
