@@ -21,6 +21,7 @@ import AccountPage from '@/pages/AccountPage';
 import AccountLoginPage from '@/pages/AccountLoginPage';
 import MapPage from '@/pages/MapPage';
 import LoginPage from '@/pages/LoginPage';
+import AdminSetupPage from '@/pages/AdminSetupPage';
 import AdminDashboardPage from '@/pages/AdminDashboardPage';
 import AdminEventsPage from '@/pages/AdminEventsPage';
 import AdminSponsorsPage from '@/pages/AdminSponsorsPage';
@@ -63,6 +64,7 @@ function App() {
 
           {/* Admin login */}
           <Route path="/admin/login" element={<LoginPage />} />
+          <Route path="/admin/setup" element={<AdminSetupPage />} />
 
           {/* Admin */}
           <Route path="/admin" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />

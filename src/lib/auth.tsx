@@ -6,7 +6,11 @@ interface AuthContextValue {
   session: Session | null;
   user: User | null;
   loading: boolean;
+  isAdmin: boolean;
+  adminLoading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
+  signUpFirstAdmin: (email: string, password: string) => Promise<{ error: string | null; confirmationRequired: boolean }>;
+  claimFirstAdmin: () => Promise<{ claimed: boolean; error: string | null }>;
   signOut: () => Promise<void>;
 }
 
@@ -15,16 +19,37 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminLoading, setAdminLoading] = useState(true);
+
+  const refreshAdminRole = async (nextSession: Session | null) => {
+    if (!nextSession) {
+      setIsAdmin(false);
+      setAdminLoading(false);
+      return;
+    }
+
+    setAdminLoading(true);
+    const { data, error } = await supabase
+      .from('admin_users')
+      .select('role')
+      .eq('user_id', nextSession.user.id)
+      .maybeSingle();
+    setIsAdmin(!error && Boolean(data?.role));
+    setAdminLoading(false);
+  };
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setLoading(false);
+      void refreshAdminRole(data.session);
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
       setLoading(false);
+      void refreshAdminRole(newSession);
     });
 
     return () => {
@@ -37,12 +62,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: error?.message ?? null };
   };
 
+  const claimFirstAdmin = async (sessionToRefresh = session) => {
+    const { data, error } = await supabase.rpc('claim_first_admin');
+    if (!error) {
+      const currentSession = sessionToRefresh ?? (await supabase.auth.getSession()).data.session;
+      await refreshAdminRole(currentSession);
+    }
+    return { claimed: data === true, error: error?.message ?? null };
+  };
+
+  const signUpFirstAdmin = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    if (error) return { error: error.message, confirmationRequired: false };
+    if (!data.session) return { error: null, confirmationRequired: true };
+
+    setSession(data.session);
+    const result = await claimFirstAdmin(data.session);
+    return { error: result.error ?? (result.claimed ? null : 'Första admin är redan skapad.'), confirmationRequired: false };
+  };
+
   const signOut = async () => {
     await supabase.auth.signOut();
   };
 
   return (
-    <AuthContext.Provider value={{ session, user: session?.user ?? null, loading, signIn, signOut }}>
+    <AuthContext.Provider value={{ session, user: session?.user ?? null, loading, isAdmin, adminLoading, signIn, signUpFirstAdmin, claimFirstAdmin, signOut }}>
       {children}
     </AuthContext.Provider>
   );

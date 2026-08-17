@@ -3,9 +3,9 @@ import { useAuth } from '@/lib/auth';
 import { Loader2 } from 'lucide-react';
 
 export default function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user, loading } = useAuth();
+  const { user, loading, isAdmin, adminLoading } = useAuth();
 
-  if (loading) {
+  if (loading || adminLoading) {
     return (
       <div className="min-h-screen bg-ink-900 flex items-center justify-center">
         <Loader2 className="w-8 h-8 text-amber-400 animate-spin" />
@@ -15,6 +15,10 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
 
   if (!user) {
     return <Navigate to="/admin/login" replace />;
+  }
+
+  if (!isAdmin) {
+    return <Navigate to="/admin/login?error=not-admin" replace />;
   }
 
   return <>{children}</>;
