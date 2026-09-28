@@ -198,13 +198,13 @@ export default function AdminSponsorsPage() {
             </div>
 
             <div>
-              <label className="text-sm font-medium text-white/70 mb-2 block">Logo-URL</label>
+              <label className="text-sm font-medium text-white/70 mb-2 block">Logo-URL eller sökväg</label>
               <input
-                type="url"
+                type="text"
                 value={form.logo_url}
                 onChange={(e) => setForm({ ...form, logo_url: e.target.value })}
                 className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:border-amber-500/50 focus:outline-none focus:ring-1 focus:ring-amber-500/30 transition-all"
-                placeholder="https://exempel.se/logo.png"
+                placeholder="https://exempel.se/logo.png eller /imported-sponsors/logo.png"
               />
               {form.logo_url && (
                 <div className="mt-2 bg-white rounded-lg p-3 inline-flex">
