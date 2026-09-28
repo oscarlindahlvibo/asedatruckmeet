@@ -19,7 +19,7 @@ function TimeUnit({ value, label }: { value: number; label: string }) {
 
 export default function ComingSoonPage() {
   const { event } = useActiveEvent();
-  const target = event?.countdown_target || SITE_CONFIG.eventStartDate;
+  const target = import.meta.env.VITE_TICKETS_RELEASE_AT || event?.countdown_target || SITE_CONFIG.eventStartDate;
   const { days, hours, minutes, seconds } = useCountdown(target);
   const year = event?.year ?? SITE_CONFIG.year;
 
