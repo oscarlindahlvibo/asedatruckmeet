@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import { supabase } from '@/lib/supabase';
 import type { Sponsor, SponsorTier } from '@/types';
-import { Plus, Pencil, Trash2, X, Loader2, AlertCircle, Crown, Award, Medal, GripVertical, Eye, EyeOff } from 'lucide-react';
+import { Plus, Pencil, Trash2, X, Loader2, AlertCircle, Crown, Award, Medal, GripVertical, Eye, EyeOff, Upload } from 'lucide-react';
 
 const TIER_CONFIG: Record<SponsorTier, { label: string; color: string; icon: typeof Crown }> = {
   main: { label: 'Huvudpartner', color: 'bg-amber-500', icon: Crown },
@@ -42,6 +42,7 @@ export default function AdminSponsorsPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<FormData>(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
+  const [uploadingLogo, setUploadingLogo] = useState(false);
 
   const fetchSponsors = useCallback(async () => {
     setLoading(true);
@@ -82,6 +83,34 @@ export default function AdminSponsorsPage() {
     setForm(EMPTY_FORM);
     setShowForm(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLogoUpload = async (file: File | undefined) => {
+    if (!file) return;
+    if (!['image/png', 'image/jpeg', 'image/webp', 'image/svg+xml'].includes(file.type)) {
+      setError('Loggan måste vara PNG, JPG, WebP eller SVG.');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setError('Loggan får vara högst 5 MB.');
+      return;
+    }
+
+    setUploadingLogo(true);
+    setError(null);
+    const extension = file.name.split('.').pop()?.toLowerCase() || 'png';
+    const path = `sponsors/${crypto.randomUUID()}.${extension}`;
+    const { error: uploadError } = await supabase.storage
+      .from('truckmeet-media')
+      .upload(path, file, { cacheControl: '3600', contentType: file.type, upsert: false });
+
+    if (uploadError) {
+      setError(`Kunde inte ladda upp loggan: ${uploadError.message}`);
+    } else {
+      const { data } = supabase.storage.from('truckmeet-media').getPublicUrl(path);
+      setForm((current) => ({ ...current, logo_url: data.publicUrl }));
+    }
+    setUploadingLogo(false);
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -199,6 +228,23 @@ export default function AdminSponsorsPage() {
 
             <div>
               <label className="text-sm font-medium text-white/70 mb-2 block">Logo-URL eller sökväg</label>
+              <div className="mb-3 flex flex-wrap items-center gap-3">
+                <label className="btn-ghost cursor-pointer px-4 py-2.5 text-sm">
+                  <Upload className="w-4 h-4" />
+                  {uploadingLogo ? 'Laddar upp...' : 'Ladda upp logga'}
+                  <input
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                    className="sr-only"
+                    disabled={uploadingLogo}
+                    onChange={(e) => {
+                      void handleLogoUpload(e.target.files?.[0]);
+                      e.currentTarget.value = '';
+                    }}
+                  />
+                </label>
+                <span className="text-xs text-white/40">PNG, JPG, WebP eller SVG · max 5 MB</span>
+              </div>
               <input
                 type="text"
                 value={form.logo_url}
