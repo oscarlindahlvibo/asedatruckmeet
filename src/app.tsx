@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { AuthProvider } from '@/lib/auth';
+import { AuthProvider, useAuth } from '@/lib/auth';
 import Layout from '@/components/Layout';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import HomePage from '@/pages/HomePage';
@@ -38,7 +38,9 @@ const comingSoonMode = import.meta.env.VITE_COMING_SOON === 'true';
 
 function PublicLayout() {
   const location = useLocation();
-  return comingSoonMode && !location.pathname.startsWith('/admin') ? <ComingSoonPage /> : <Layout />;
+  const { session, loading } = useAuth();
+  const showComingSoon = comingSoonMode && !location.pathname.startsWith('/admin') && (loading || !session);
+  return showComingSoon ? <ComingSoonPage /> : <Layout />;
 }
 
 function App() {
