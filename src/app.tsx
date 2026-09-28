@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from '@/lib/auth';
 import Layout from '@/components/Layout';
 import ProtectedRoute from '@/components/ProtectedRoute';
@@ -32,6 +32,14 @@ import AdminTrucksPage from '@/pages/AdminTrucksPage';
 import AdminOrdersPage from '@/pages/AdminOrdersPage';
 import AdminMapPage from '@/pages/AdminMapPage';
 import AdminVotePage from '@/pages/AdminVotePage';
+import ComingSoonPage from '@/pages/ComingSoonPage';
+
+const comingSoonMode = import.meta.env.VITE_COMING_SOON === 'true';
+
+function PublicLayout() {
+  const location = useLocation();
+  return comingSoonMode && !location.pathname.startsWith('/admin') ? <ComingSoonPage /> : <Layout />;
+}
 
 function App() {
   return (
@@ -39,7 +47,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* Public site */}
-          <Route element={<Layout />}>
+          <Route element={<PublicLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/om" element={<AboutPage />} />
             <Route path="/artister" element={<ArtistsPage />} />
